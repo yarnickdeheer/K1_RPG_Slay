@@ -52,6 +52,9 @@ MonoBehaviour:
     width: 1920
     height: 997
   m_MinSize: {x: 875, y: 542}
+<<<<<<< HEAD
+>>>>>>> d6742e050e1227fdc165de322d4cb0eeba310d43
+=======
 >>>>>>> d6742e050e1227fdc165de322d4cb0eeba310d43
   m_MaxSize: {x: 10000, y: 10000}
   m_UseTopView: 1
@@ -123,12 +126,21 @@ MonoBehaviour:
     x: 0
     y: 30
 <<<<<<< HEAD
+<<<<<<< HEAD
     width: 1536
     height: 731
   m_MinSize: {x: 781, y: 342}
   m_MaxSize: {x: 16006, y: 8042}
   vertical: 0
   controlID: 99
+=======
+    width: 1920
+    height: 947
+  m_MinSize: {x: 779, y: 492}
+  m_MaxSize: {x: 16004, y: 14042}
+  vertical: 0
+  controlID: 36
+>>>>>>> d6742e050e1227fdc165de322d4cb0eeba310d43
 =======
     width: 1920
     height: 947
@@ -157,12 +169,21 @@ MonoBehaviour:
     x: 0
     y: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
     width: 1150
     height: 731
   m_MinSize: {x: 505, y: 342}
   m_MaxSize: {x: 12005, y: 8042}
   vertical: 1
   controlID: 100
+=======
+    width: 1437
+    height: 947
+  m_MinSize: {x: 503, y: 492}
+  m_MaxSize: {x: 12003, y: 14042}
+  vertical: 1
+  controlID: 37
+>>>>>>> d6742e050e1227fdc165de322d4cb0eeba310d43
 =======
     width: 1437
     height: 947
@@ -192,12 +213,21 @@ MonoBehaviour:
     x: 0
     y: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
     width: 1150
     height: 462
   m_MinSize: {x: 505, y: 221}
   m_MaxSize: {x: 12005, y: 4021}
   vertical: 0
   controlID: 101
+=======
+    width: 1437
+    height: 598
+  m_MinSize: {x: 503, y: 221}
+  m_MaxSize: {x: 12003, y: 4021}
+  vertical: 0
+  controlID: 38
+>>>>>>> d6742e050e1227fdc165de322d4cb0eeba310d43
 =======
     width: 1437
     height: 598
@@ -250,15 +280,21 @@ MonoBehaviour:
     x: 201
     y: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
     width: 847
     height: 462
   m_MinSize: {x: 202, y: 221}
   m_MaxSize: {x: 4002, y: 4021}
 =======
+=======
+>>>>>>> d6742e050e1227fdc165de322d4cb0eeba310d43
     width: 1064
     height: 598
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 4000, y: 4000}
+<<<<<<< HEAD
+>>>>>>> d6742e050e1227fdc165de322d4cb0eeba310d43
+=======
 >>>>>>> d6742e050e1227fdc165de322d4cb0eeba310d43
   m_ActualView: {fileID: 16}
   m_Panes:
@@ -309,6 +345,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
     y: 462
     width: 1150
     height: 269
@@ -316,12 +353,17 @@ MonoBehaviour:
   m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 18}
 =======
+=======
+>>>>>>> d6742e050e1227fdc165de322d4cb0eeba310d43
     y: 598
     width: 1437
     height: 349
   m_MinSize: {x: 231, y: 271}
   m_MaxSize: {x: 10001, y: 10021}
   m_ActualView: {fileID: 17}
+<<<<<<< HEAD
+>>>>>>> d6742e050e1227fdc165de322d4cb0eeba310d43
+=======
 >>>>>>> d6742e050e1227fdc165de322d4cb0eeba310d43
   m_Panes:
   - {fileID: 17}
@@ -478,7 +520,11 @@ MonoBehaviour:
       m_SelectedIDs: 
       m_LastClickedID: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
       m_ExpandedIDs: 58fbffff
+=======
+      m_ExpandedIDs: 5cfbffff
+>>>>>>> d6742e050e1227fdc165de322d4cb0eeba310d43
 =======
       m_ExpandedIDs: 5cfbffff
 >>>>>>> d6742e050e1227fdc165de322d4cb0eeba310d43
@@ -688,7 +734,11 @@ MonoBehaviour:
     m_SearchArea: 1
     m_Folders:
 <<<<<<< HEAD
+<<<<<<< HEAD
     - Assets
+=======
+    - Assets/yarnick/scripts
+>>>>>>> d6742e050e1227fdc165de322d4cb0eeba310d43
 =======
     - Assets/yarnick/scripts
 >>>>>>> d6742e050e1227fdc165de322d4cb0eeba310d43
@@ -871,7 +921,11 @@ MonoBehaviour:
   m_TitleContent:
     m_Text: Navigation
 <<<<<<< HEAD
+<<<<<<< HEAD
     m_Image: {fileID: 7874161543223113035, guid: 0000000000000000d000000000000000,
+=======
+    m_Image: {fileID: 1087843850482249999, guid: 0000000000000000d000000000000000,
+>>>>>>> d6742e050e1227fdc165de322d4cb0eeba310d43
 =======
     m_Image: {fileID: 1087843850482249999, guid: 0000000000000000d000000000000000,
 >>>>>>> d6742e050e1227fdc165de322d4cb0eeba310d43
@@ -901,7 +955,11 @@ MonoBehaviour:
   m_TitleContent:
     m_Text: Lighting
 <<<<<<< HEAD
+<<<<<<< HEAD
     m_Image: {fileID: 8394858894532624064, guid: 0000000000000000d000000000000000,
+=======
+    m_Image: {fileID: -1347227620855488341, guid: 0000000000000000d000000000000000,
+>>>>>>> d6742e050e1227fdc165de322d4cb0eeba310d43
 =======
     m_Image: {fileID: -1347227620855488341, guid: 0000000000000000d000000000000000,
 >>>>>>> d6742e050e1227fdc165de322d4cb0eeba310d43
