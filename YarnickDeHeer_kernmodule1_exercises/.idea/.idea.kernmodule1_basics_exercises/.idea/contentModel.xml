@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\dell studio xps\.Rider2019.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\dell studio xps\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_kernmodule1_basics_exercises.-1848087693.00" t="ExcludeRecursive" />
+    <e p="C:\Users\dell studio xps\OneDrive\Documenten\kermodule gamedevelopment 1\kernmodule1_basics_exercises" t="IncludeRecursive">
+      <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
+      <e p="Assets" t="Include">
+        <e p="1" t="Include">
+          <e p="scripts" t="Include">
+            <e p="ActorBase.cs" t="Include" />
+            <e p="BuffEnemy.cs" t="Include" />
+            <e p="Enemy.cs" t="Include" />
+            <e p="IDamageable.cs" t="Include" />
+            <e p="Player.cs" t="Include" />
+            <e p="Wall.cs" t="Include" />
+          </e>
+        </e>
+        <e p="2" t="Include">
+          <e p="Attackstate.cs" t="Include" />
+          <e p="IdleState.cs" t="Include" />
+          <e p="Istate.cs" t="Include" />
+          <e p="State.cs" t="Include" />
+          <e p="StateMachine.cs" t="Include" />
+        </e>
+        <e p="3" t="Include">
+          <e p="AbstractFuntion.cs" t="Include" />
+        </e>
+        <e p="4" t="Include">
+          <e p="WaveSpawner.cs" t="Include" />
+        </e>
+        <e p="5" t="Include">
+          <e p="EventManager.cs" t="Include" />
+        </e>
+      </e>
+      <e p="kernmodule1_basics_exercises.sln" t="IncludeFlat" />
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="Packages" t="ExcludeRecursive" />
+      <e p="Temp\bin" t="ExcludeRecursive" />
+    </e>
+  </component>
+</project>
