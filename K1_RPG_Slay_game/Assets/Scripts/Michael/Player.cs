@@ -16,6 +16,8 @@ public class Player : IPlayer
 	//IPlayer Implementation
 	public string PlayerClass { get; set; }
 
+	public int Xp { get; set; }
+
 	//Constructor
 	public Player(int vit, int str, int dex, string playerClass)
 	{
@@ -36,5 +38,35 @@ public class Player : IPlayer
 	public void TakeDamage()
 	{
 
+	}
+
+	public void LevelUp(int xp)
+	{
+		//this doesn't work, i give up for now
+		Level = (int) Mathf.Floor((Xp + xp) / 12) + 7;
+
+		//Shenanigans to display the correct amount of xp
+		int currentLevelXp = 0;
+		int nextLevelXp = 0;
+
+		//Xp = 30;
+		//xp = 10;
+		//40 xp
+		//Level = 9
+
+		for (int i = Level; i <= 7; i--)
+		{
+			nextLevelXp += (i - 6) * 12;
+			currentLevelXp += (i - 7) * 12;
+		}
+
+		if (Xp + xp > nextLevelXp - currentLevelXp)
+		{
+			Xp = xp + Xp - nextLevelXp + currentLevelXp;
+		}
+		else
+		{
+			Xp += xp;
+		}
 	}
 }
