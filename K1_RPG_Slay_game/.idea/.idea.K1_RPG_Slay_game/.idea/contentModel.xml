@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\kernmodule1\K1_RPG_Slay\K1_RPG_Slay_game" t="IncludeRecursive">
+      <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
+      <e p="Assets" t="Include">
+        <e p="Scripts" t="Include">
+          <e p="GameManager.cs" t="Include" />
+          <e p="Michael" t="Include">
+            <e p="Armors" t="Include">
+              <e p="HeavyArmor.cs" t="Include" />
+              <e p="IArmor.cs" t="Include" />
+              <e p="LeatherArmor.cs" t="Include" />
+              <e p="LightArmor.cs" t="Include" />
+              <e p="MagicArmor.cs" t="Include" />
+              <e p="RagsArmor.cs" t="Include" />
+              <e p="SoldierArmor.cs" t="Include" />
+              <e p="TankArmor.cs" t="Include" />
+            </e>
+            <e p="Enemy.cs" t="Include" />
+            <e p="ICombatant.cs" t="Include" />
+            <e p="IDamageable.cs" t="Include" />
+            <e p="Player.cs" t="Include" />
+            <e p="Stats.cs" t="Include" />
+            <e p="Weapons" t="Include">
+              <e p="Battleaxe.cs" t="Include" />
+              <e p="Bow.cs" t="Include" />
+              <e p="Greathammer.cs" t="Include" />
+              <e p="Greatsword.cs" t="Include" />
+              <e p="IWeapon.cs" t="Include" />
+              <e p="Rapier.cs" t="Include" />
+              <e p="Shortsword.cs" t="Include" />
+              <e p="Sword.cs" t="Include" />
+            </e>
+          </e>
+          <e p="Yarnick" t="Include">
+            <e p="Scripts" t="Include">
+              <e p="CombatHandler.cs" t="Include" />
+              <e p="CombatManager.cs" t="Include" />
+              <e p="Display" t="Include">
+                <e p="CombatDisplay.cs" t="Include" />
+                <e p="PostBattleDisplay.cs" t="Include" />
+              </e>
+              <e p="Input" t="Include">
+                <e p="InputHandler.cs" t="Include" />
+                <e p="KeyCommand.cs" t="Include" />
+              </e>
+              <e p="Interfaces" t="Include">
+                <e p="Icolletable.cs" t="Include" />
+              </e>
+              <e p="RewardChoice.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="K1_RPG_Slay_game.sln" t="IncludeFlat" />
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="Packages" t="ExcludeRecursive" />
+      <e p="Temp\bin" t="ExcludeRecursive" />
+    </e>
+    <e p="C:\Users\dell studio xps\.Rider2019.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\dell studio xps\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_K1_RPG_Slay_game.-184394808.00" t="ExcludeRecursive" />
+  </component>
+</project>
