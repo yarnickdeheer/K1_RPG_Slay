@@ -29,8 +29,12 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: Project
   m_RootView: {fileID: 6}
+<<<<<<< HEAD
+  m_MinSize: {x: 875, y: 542}
+=======
   m_MinSize: {x: 875, y: 392}
 >>>>>>> 6cab259df40c6d8b104d9ebc8bd7620fc6fd396c
+>>>>>>> 9752190b980ba1bcb814c39aa3b7fcf49097a0bc
   m_MaxSize: {x: 10000, y: 10000}
   m_Maximized: 1
 --- !u!114 &2
@@ -62,11 +66,15 @@ MonoBehaviour:
 =======
     width: 2560
     height: 1307
-  m_MinSize: {x: 678, y: 342}
-  m_MaxSize: {x: 12003, y: 8042}
+  m_MinSize: {x: 677, y: 492}
+  m_MaxSize: {x: 14001, y: 14042}
   vertical: 0
+<<<<<<< HEAD
+  controlID: 110
+=======
   controlID: 17
 >>>>>>> 6cab259df40c6d8b104d9ebc8bd7620fc6fd396c
+>>>>>>> 9752190b980ba1bcb814c39aa3b7fcf49097a0bc
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -144,8 +152,12 @@ MonoBehaviour:
 <<<<<<< HEAD
   m_Name: ProjectBrowser
 =======
+<<<<<<< HEAD
+  m_Name: ProjectBrowser
+=======
   m_Name: ConsoleWindow
 >>>>>>> 6cab259df40c6d8b104d9ebc8bd7620fc6fd396c
+>>>>>>> 9752190b980ba1bcb814c39aa3b7fcf49097a0bc
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
@@ -167,15 +179,20 @@ MonoBehaviour:
     y: 933
     width: 2042
     height: 374
-  m_MinSize: {x: 100, y: 100}
-  m_MaxSize: {x: 4000, y: 4000}
-  m_ActualView: {fileID: 18}
+  m_MinSize: {x: 231, y: 271}
+  m_MaxSize: {x: 10001, y: 10021}
+  m_ActualView: {fileID: 13}
   m_Panes:
   - {fileID: 13}
   - {fileID: 18}
+<<<<<<< HEAD
+  m_Selected: 0
+  m_LastSelected: 1
+=======
   m_Selected: 1
   m_LastSelected: 0
 >>>>>>> 6cab259df40c6d8b104d9ebc8bd7620fc6fd396c
+>>>>>>> 9752190b980ba1bcb814c39aa3b7fcf49097a0bc
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -293,11 +310,15 @@ MonoBehaviour:
 =======
     width: 2042
     height: 1307
-  m_MinSize: {x: 403, y: 342}
-  m_MaxSize: {x: 8003, y: 8042}
+  m_MinSize: {x: 402, y: 492}
+  m_MaxSize: {x: 10001, y: 14042}
   vertical: 1
+<<<<<<< HEAD
+  controlID: 111
+=======
   controlID: 105
 >>>>>>> 6cab259df40c6d8b104d9ebc8bd7620fc6fd396c
+>>>>>>> 9752190b980ba1bcb814c39aa3b7fcf49097a0bc
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -327,11 +348,15 @@ MonoBehaviour:
 =======
     width: 2042
     height: 933
-  m_MinSize: {x: 403, y: 221}
-  m_MaxSize: {x: 8003, y: 4021}
+  m_MinSize: {x: 402, y: 221}
+  m_MaxSize: {x: 8002, y: 4021}
   vertical: 0
+<<<<<<< HEAD
+  controlID: 112
+=======
   controlID: 106
 >>>>>>> 6cab259df40c6d8b104d9ebc8bd7620fc6fd396c
+>>>>>>> 9752190b980ba1bcb814c39aa3b7fcf49097a0bc
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -361,9 +386,14 @@ MonoBehaviour:
     y: 0
     width: 1707
     height: 933
+<<<<<<< HEAD
+  m_MinSize: {x: 202, y: 221}
+  m_MaxSize: {x: 4002, y: 4021}
+=======
 >>>>>>> 6cab259df40c6d8b104d9ebc8bd7620fc6fd396c
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 4000, y: 4000}
+>>>>>>> 9752190b980ba1bcb814c39aa3b7fcf49097a0bc
   m_ActualView: {fileID: 16}
   m_Panes:
   - {fileID: 16}
@@ -446,14 +476,23 @@ MonoBehaviour:
     m_SearchArea: 1
     m_Folders:
 <<<<<<< HEAD
+    - Assets/Scripts
+=======
+<<<<<<< HEAD
     - Assets
 =======
     - Assets/Scripts/Michael
 >>>>>>> 6cab259df40c6d8b104d9ebc8bd7620fc6fd396c
+>>>>>>> 9752190b980ba1bcb814c39aa3b7fcf49097a0bc
     m_Globs: []
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
+<<<<<<< HEAD
+  - Assets/Scripts
+  m_LastFoldersGridSize: -1
+  m_LastProjectPath: C:\Users\Michael\Documents\K1_RPG_Slay\K1_RPG_Slay_game
+=======
 <<<<<<< HEAD
   - Assets
   m_LastFoldersGridSize: -1
@@ -463,10 +502,16 @@ MonoBehaviour:
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\Michael\K1_RPG_Slay\K1_RPG_Slay_game
 >>>>>>> 6cab259df40c6d8b104d9ebc8bd7620fc6fd396c
+>>>>>>> 9752190b980ba1bcb814c39aa3b7fcf49097a0bc
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
+<<<<<<< HEAD
+    m_SelectedIDs: 76370000
+    m_LastClickedID: 14198
+    m_ExpandedIDs: 0000000070370000763700007837000000ca9a3b
+=======
 <<<<<<< HEAD
     m_SelectedIDs: 58370000
     m_LastClickedID: 14168
@@ -476,6 +521,7 @@ MonoBehaviour:
     m_LastClickedID: 14206
     m_ExpandedIDs: 000000006e3700007437000000ca9a3b
 >>>>>>> 6cab259df40c6d8b104d9ebc8bd7620fc6fd396c
+>>>>>>> 9752190b980ba1bcb814c39aa3b7fcf49097a0bc
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -504,10 +550,14 @@ MonoBehaviour:
     m_SelectedIDs: 
     m_LastClickedID: 0
 <<<<<<< HEAD
+    m_ExpandedIDs: 0000000070370000
+=======
+<<<<<<< HEAD
     m_ExpandedIDs: 0000000058370000
 =======
     m_ExpandedIDs: 000000006e370000
 >>>>>>> 6cab259df40c6d8b104d9ebc8bd7620fc6fd396c
+>>>>>>> 9752190b980ba1bcb814c39aa3b7fcf49097a0bc
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 

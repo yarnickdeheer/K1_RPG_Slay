@@ -14,6 +14,7 @@ public class Enemy : IEnemy
 	public int MovePoints { get; set; }
 
 	//IEnemy Implementation
+	public int XpWorth { get; set; }
 
 	//Constructor
 	public Enemy(int vit, int str, int dex, int weight)
@@ -27,11 +28,12 @@ public class Enemy : IEnemy
 		Health = 10 + 2 * vit;
 		WeightLimit = 20 + 2 * str;
 		MovePoints = (int)Mathf.Floor(5 + dex / 5 - (weight - WeightLimit) / 10);
+
+		XpWorth = Level * 10;
 	}
 
 	public void TakeDamage()
 	{
 
 	}
-	
 }

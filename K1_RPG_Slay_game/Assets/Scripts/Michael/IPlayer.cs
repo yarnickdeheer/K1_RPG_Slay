@@ -1,4 +1,10 @@
 ﻿public interface IPlayer : ICombatant
 {
-	string PlayerClass { get; set; }
+	PlayerClass PlayerClass { get; set; }
+	int TotalXp { get; set; }
+
+	void GetXp (int xp);
+
+	IWeapon Weapon { get; set; }
+	IArmor Armor { get; set; }
 }
