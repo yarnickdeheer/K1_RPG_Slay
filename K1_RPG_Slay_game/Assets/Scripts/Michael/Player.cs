@@ -14,23 +14,30 @@ public class Player : IPlayer
 	public int MovePoints { get; set; }
 
 	//IPlayer Implementation
-	public string PlayerClass { get; set; }
+	public PlayerClass PlayerClass { get; set; }
 
-	public int Xp { get; set; }
+	public int TotalXp { get; set; }
+
+	public IWeapon Weapon { get; set; }
+	public IArmor Armor { get; set; }
 
 	//Constructor
-	public Player(int vit, int str, int dex, string playerClass)
+	public Player(int vit, int str, int dex, PlayerClass playerClass, IWeapon weapon, IArmor armor)
 	{
 		Level = vit + str + dex;
 
 		Vit = vit;
 		Str = str;
 		Dex = dex;
-		
+
+		Weapon = weapon;
+		Armor = armor;
+		int weight = Armor.Weight + weapon.Weight;
+
+		//TODO: Put numbers in constants
 		Health = 10 + 2 * vit;
 		WeightLimit = 20 + 2 * str;
-		//This formula is incomplete and will not work correctly until I implement a method for getting the weapon and armor referenced in this class
-		MovePoints = (int) Mathf.Floor(5 + dex / 5 - (/*Weight - */WeightLimit) / 10);
+		MovePoints = (int) Mathf.Floor(5 + dex / 5 - (weight - WeightLimit) / 10);
 
 		PlayerClass = playerClass;
 	}
@@ -40,33 +47,30 @@ public class Player : IPlayer
 
 	}
 
-	public void LevelUp(int xp)
+	public void GetXp(int xp)
 	{
-		//this doesn't work, i give up for now
-		Level = (int) Mathf.Floor((Xp + xp) / 12) + 7;
+		TotalXp += xp;
+		int newXp = TotalXp;
+		int i = 1;
+		int currLevel = Level;
 
-		//Shenanigans to display the correct amount of xp
-		int currentLevelXp = 0;
-		int nextLevelXp = 0;
-
-		//Xp = 30;
-		//xp = 10;
-		//40 xp
-		//Level = 9
-
-		for (int i = Level; i <= 7; i--)
+		do
 		{
-			nextLevelXp += (i - 6) * 12;
-			currentLevelXp += (i - 7) * 12;
+			newXp -= i * 12;
+			i++;
 		}
+		while (newXp > 0);
 
-		if (Xp + xp > nextLevelXp - currentLevelXp)
+		Level = i + 7;
+
+		if (Level > currLevel)
 		{
-			Xp = xp + Xp - nextLevelXp + currentLevelXp;
+			AllocateStats(Level - currLevel);
 		}
-		else
-		{
-			Xp += xp;
-		}
+	}
+
+	private void AllocateStats(int points)
+	{
+
 	}
 }
