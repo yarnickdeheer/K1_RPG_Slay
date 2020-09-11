@@ -25,6 +25,7 @@ public class CombatDisplay
             else
             {
                 _battle_option.SetActive(false);
+                // quick test
             }
         }
     }
