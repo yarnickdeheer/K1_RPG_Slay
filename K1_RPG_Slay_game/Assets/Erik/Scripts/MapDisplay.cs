@@ -5,6 +5,7 @@ using UnityEngine;
 public class MapDisplay
 {
     //DISCUSS: Should enemies have only 2 spawning positions? Or should the enemy spawning be expanded more?
+    //TODO: Make the images and things a bit clearer and better.
 
     private Vector2 _firstEcounterPosition = new Vector2(-3.5f,0);
     private Vector2 _secondEcounterPosition = new Vector2(3.5f, 0);
