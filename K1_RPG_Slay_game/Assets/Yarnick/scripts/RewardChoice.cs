@@ -5,9 +5,31 @@ using UnityEngine;
 public class RewardChoice : Icolletable
 {
    public int Rarity { get; set; }
+   public int _itemId { get; set; }
+   public IWeapon Weapon { get; set; }
+   public IPlayer Player { get; set; }
+
+
+   public RewardChoice( int rarity, int itemId, IWeapon weapon, IPlayer player)
+   {
+      Rarity = rarity;
+      _itemId = itemId; 
+      Weapon = weapon;
+      Player = player;
+   }
+   
+   
    public void CollectItem()
    {
-      throw new System.NotImplementedException();
+      // get choice id   
+      //quick test
+      if (Input.GetKeyDown(KeyCode.Space))
+      {
+         Player.Weapon = Weapon;
+         // ga terug naar encouter/map
+      }
+      
+    
       // collect the item if the player chooses so 
       // drop current gear in that possition if it has something in that position
       
