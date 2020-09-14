@@ -12,7 +12,7 @@ public class CombatHandler : IcombatHandler
     public void StartTurn()
     {
         // we need to know speed of player and enemy to see who attacks first
-
+        
         if (_gameManager.player.MovePoints > _gameManager.Currentenemy.MovePoints)
         {
             PlayerTurn = true;

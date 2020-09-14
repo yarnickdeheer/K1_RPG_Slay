@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
 	public static int MOVEPOINTSDEXMODIFIER = 5;
 	public static int MOVEPOINTSWEIGHTMODIFIER = 10;
 
-	public static ICombatant player;
+	public ICombatant player;
 
 	void Awake()
     {
