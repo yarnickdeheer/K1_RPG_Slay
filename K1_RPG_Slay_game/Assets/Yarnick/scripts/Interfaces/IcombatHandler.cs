@@ -5,5 +5,6 @@ using UnityEngine;
 public interface IcombatHandler
 {
       bool _playerturn { get; set; }
+    //test
     
 }
