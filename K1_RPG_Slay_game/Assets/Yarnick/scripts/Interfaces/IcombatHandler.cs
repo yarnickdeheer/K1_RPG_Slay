@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface ICombatHandler
+public interface IcombatHandler
 {
-      bool _playerturn { get; set; }
+    bool PlayerTurn { get; set; }
     //test
-    
+
 }

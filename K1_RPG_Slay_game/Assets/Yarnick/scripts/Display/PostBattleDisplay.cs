@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class PostBattleDisplay : IdisplayItem
 {
- 
+
     /// <summary>
     ///  this display wil show after the battle
     /// check if you won
@@ -16,28 +16,28 @@ public class PostBattleDisplay : IdisplayItem
     ///  
     /// </summary>
 
-    public Image _ItemImage { get; set; }
-    public int _ItemId { get; set; }
-    
+    public Image ItemImage { get; set; }
+    public int ItemId { get; set; }
+
     public IWeapon Weapon { get; set; }
     public IPlayer Player { get; set; }
 
     public int _Rewards;
     private bool _Won;
     private int _ExperienceGained;
-    
 
 
-    public PostBattleDisplay( int _itemId , Image _itemImage ,IWeapon weapon,IPlayer player)
+
+    public PostBattleDisplay(int itemId, Image itemImage, IWeapon weapon, IPlayer player)
     {
-        _ItemImage = _itemImage;
-        _ItemId = _itemId;
+        ItemImage = itemImage;
+        ItemId = itemId;
         Weapon = weapon;
         Player = player;
     }
     public void BattleOutcome()
     {
-       // throw new System.NotImplementedException();
+        // throw new System.NotImplementedException();
         // needs to know who won to decide if the player gets rewards
         if (_Won == true)
         {
@@ -52,10 +52,10 @@ public class PostBattleDisplay : IdisplayItem
     }
     public void GenerateRewards()
     {
-        
+
         Player.GetXp(10);
         // let the player choose if it wants the reward that will be presented of keep the setup he has
     }
-    
+
 
 }
