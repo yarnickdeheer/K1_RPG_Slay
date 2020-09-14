@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IcombatHandler
+public interface ICombatHandler
 {
       bool _playerturn { get; set; }
     //test

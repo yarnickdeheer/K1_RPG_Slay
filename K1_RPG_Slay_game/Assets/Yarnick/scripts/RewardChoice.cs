@@ -13,7 +13,7 @@ public class RewardChoice : Icolletable
    public RewardChoice( int rarity, int itemId, IWeapon weapon, IPlayer player)
    {
       Rarity = rarity;
-      _itemId = itemId; 
+      _itemId = itemId;
       Weapon = weapon;
       Player = player;
    }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CombatHandler : IcombatHandler
+public class CombatHandler : ICombatHandler
 {
     private int _MovesLeft;
     private bool _TurnConfirmed;
@@ -28,7 +28,7 @@ public class CombatHandler : IcombatHandler
             // set combat display aan 
             _playerturn = false;
             NextTurn();
-
+			
         }
         else
         {

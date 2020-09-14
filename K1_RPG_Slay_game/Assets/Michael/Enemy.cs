@@ -25,9 +25,11 @@ public class Enemy : IEnemy
 		Str = str;
 		Dex = dex;
 
-		Health = 10 + 2 * vit;
-		WeightLimit = 20 + 2 * str;
-		MovePoints = (int)Mathf.Floor(5 + dex / 5 - (weight - WeightLimit) / 10);
+		//calculate the secondary stats
+		Health = GameManager.BASEHEALTH + GameManager.HEALTHVITMODIFIER * vit;
+		WeightLimit = GameManager.BASEWEIGHTLIMIT + GameManager.WEIGHTLIMITSTRMODIFIER * str;
+		MovePoints = (int)Mathf.Floor(GameManager.BASEMOVEPOINTS + dex / GameManager.MOVEPOINTSDEXMODIFIER -
+			(weight - WeightLimit) / GameManager.MOVEPOINTSWEIGHTMODIFIER);
 
 		XpWorth = Level * 10;
 	}
