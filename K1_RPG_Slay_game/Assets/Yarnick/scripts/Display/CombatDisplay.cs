@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class CombatDisplay
     {
-        private int _turnId;
+        public IcombatHandler Combathandler { get; set; }
         private GameObject _battle_option;
         private Text _textTurnId;
         private int _PlayerId;
@@ -13,12 +13,12 @@ public class CombatDisplay
         public void ShowId()
         {
             // show who's turn it is
-            _textTurnId.text = _turnId.ToString();
+           // _textTurnId.text = _turnId.ToString();
         }
         public void ShowBattleOptions()
         {
             // show battleoptions when it is the player's turn
-            if (_turnId == _PlayerId)
+            if (Combathandler._playerturn == true)
             {
                 _battle_option.SetActive(true);
             }
