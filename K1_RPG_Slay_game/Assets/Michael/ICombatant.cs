@@ -1,4 +1,4 @@
-﻿public interface ICombatant : IDamageable
+﻿	public interface ICombatant : IDamageable
 {
 	int Level { get; set; }
 
