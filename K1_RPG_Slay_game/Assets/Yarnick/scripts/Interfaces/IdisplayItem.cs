@@ -5,6 +5,6 @@ using UnityEngine;
 using UnityEngine.UI;
     public interface IdisplayItem
     {
-         Image _ItemImage { get; set; }
-         int _ItemId { get; set; }
+         Image ItemImage { get; set; }
+         int ItemId { get; set; }
     }

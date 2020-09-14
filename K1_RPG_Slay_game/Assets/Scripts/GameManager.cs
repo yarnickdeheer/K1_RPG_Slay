@@ -29,12 +29,13 @@ public class GameManager : MonoBehaviour
 	static IArmor HEAVY_ARMOR = new HeavyArmor(45, 20);
 	static IArmor TANK_ARMOR = new TankArmor(60, 30);
 
-	ICombatant player;
+	public ICombatant player;
 
 	void Awake()
     {
 		//Enemy constructor: vit, int, str, weight
-		ICombatant enemy1 = new Enemy(2, 2, 2, 30);
+		player = new Player(5, 1, 1, PlayerClass.VITOP, SWORD, LEATHER_ARMOR);
+		 ICombatant enemy1 = new Enemy(2, 2, 2, 30);
     }
 
     void Update()

@@ -16,8 +16,8 @@ public class PostBattleDisplay : IdisplayItem
     ///  
     /// </summary>
 
-    public Image _ItemImage { get; set; }
-    public int _ItemId { get; set; }
+    public Image ItemImage { get; set; }
+    public int ItemId { get; set; }
     
     public IWeapon Weapon { get; set; }
     public IPlayer Player { get; set; }
@@ -28,10 +28,10 @@ public class PostBattleDisplay : IdisplayItem
     
 
 
-    public PostBattleDisplay( int _itemId , Image _itemImage ,IWeapon weapon,IPlayer player)
+    public PostBattleDisplay( int itemId , Image itemImage ,IWeapon weapon,IPlayer player)
     {
-        _ItemImage = _itemImage;
-        _ItemId = _itemId;
+        ItemImage = itemImage;
+        ItemId = itemId;
         Weapon = weapon;
         Player = player;
     }

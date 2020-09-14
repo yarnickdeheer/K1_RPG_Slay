@@ -6,6 +6,6 @@ public interface Icolletable
 {
   //int Weight { get; set; }
   int Rarity { get; set; }
-  int _itemId { get; set; }
+  int ItemId { get; set; }
   void CollectItem();
 }

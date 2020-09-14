@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface IcombatHandler
 {
-      bool _playerturn { get; set; }
+      bool PlayerTurn { get; set; }
     //test
     
 }

@@ -5,15 +5,15 @@ using UnityEngine;
 public class RewardChoice : Icolletable
 {
    public int Rarity { get; set; }
-   public int _itemId { get; set; }
+   public int ItemId { get; set; }
    public IWeapon Weapon { get; set; }
    public IPlayer Player { get; set; }
+   public GameManager _gameManager;
 
-
-   public RewardChoice( int rarity, int itemId, IWeapon weapon, IPlayer player)
+    public RewardChoice( int rarity, int itemId, IWeapon weapon, IPlayer player)
    {
       Rarity = rarity;
-      _itemId = itemId; 
+      ItemId = itemId; 
       Weapon = weapon;
       Player = player;
    }
@@ -25,6 +25,7 @@ public class RewardChoice : Icolletable
       //quick test
       if (Input.GetKeyDown(KeyCode.Space))
       {
+        // _gameManager.player.MovePoints
          Player.Weapon = Weapon;
          // ga terug naar encouter/map
       }
