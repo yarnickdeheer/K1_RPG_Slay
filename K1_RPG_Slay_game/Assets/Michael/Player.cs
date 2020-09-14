@@ -21,23 +21,28 @@ public class Player : IPlayer
 	public IWeapon Weapon { get; set; }
 	public IArmor Armor { get; set; }
 
+	//Constants
+	
+
 	//Constructor
 	public Player(int vit, int str, int dex, PlayerClass playerClass, IWeapon weapon, IArmor armor)
 	{
 		Level = vit + str + dex;
-
 		Vit = vit;
 		Str = str;
 		Dex = dex;
 
 		Weapon = weapon;
 		Armor = armor;
+		
+		//calculate the total weight
 		int weight = Armor.Weight + weapon.Weight;
 
-		//TODO: Put numbers in constants
-		Health = 10 + 2 * vit;
-		WeightLimit = 20 + 2 * str;
-		MovePoints = (int) Mathf.Floor(5 + dex / 5 - (weight - WeightLimit) / 10);
+		//calculate the secondary stats
+		Health = GameManager.BASEHEALTH + GameManager.HEALTHVITMODIFIER * vit;
+		WeightLimit = GameManager.BASEWEIGHTLIMIT + GameManager.WEIGHTLIMITSTRMODIFIER * str;
+		MovePoints = (int) Mathf.Floor(GameManager.BASEMOVEPOINTS + dex / GameManager.MOVEPOINTSDEXMODIFIER - 
+			(weight - WeightLimit) / GameManager.MOVEPOINTSWEIGHTMODIFIER);
 
 		PlayerClass = playerClass;
 	}
@@ -49,23 +54,28 @@ public class Player : IPlayer
 
 	public void GetXp(int xp)
 	{
+		//add the gained xp to the totalxp
 		TotalXp += xp;
-		int newXp = TotalXp;
-		int i = 1;
-		int currLevel = Level;
 
+		//make some variables we can work with
+		int _newXp = TotalXp;
+		int _i = 1;
+		int _currLevel = Level;
+
+		//count the levels
 		do
 		{
-			newXp -= i * 12;
-			i++;
+			_newXp -= _i * 12;
+			_i++;
 		}
-		while (newXp > 0);
+		while (_newXp > 0);
 
-		Level = i + 7;
+		Level = _i + 7;
 
-		if (Level > currLevel)
-		{
-			AllocateStats(Level - currLevel);
+		//check if a levelup has occured
+		if (Level > _currLevel)
+		{//if so, we need to let the player allocate new stats
+			AllocateStats(Level - _currLevel);
 		}
 	}
 
