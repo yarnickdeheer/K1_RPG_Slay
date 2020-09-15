@@ -1,9 +1,0 @@
-<<<<<<< HEAD
-sceneSetups:
-- path: Assets/Erik/EncounterMap.unity
-  isLoaded: 1
-  isActive: 1
-  isSubScene: 0
-=======
-sceneSetups: []
->>>>>>> 6cab259df40c6d8b104d9ebc8bd7620fc6fd396c

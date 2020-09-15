@@ -10,7 +10,14 @@ public enum PlayerClass
 
 public class GameManager : MonoBehaviour
 {
-	//Weapon Constructor: weight, baseDamage, strScaling, dexScaling
+	//Singleton pattern
+	private static GameManager INSTANCE;
+	public static GameManager Instance
+		{
+			get { return INSTANCE; }
+		}
+
+	//Weapon Constructor to instantiate all weapons: weight, baseDamage, strScaling, dexScaling
 	//DISCUSS: Another option is making a base class Weapon and adding an enum/type of for example rapier
 	static IWeapon RAPIER = new Rapier(6, 10, 2, 0, 1);
 	static IWeapon BOW = new Bow(6, 5, 1.5f, 0, 5);
@@ -20,7 +27,7 @@ public class GameManager : MonoBehaviour
 	static IWeapon BATTLEAXE = new Battleaxe(10, 10, 0f, 1.5f, 1);
 	static IWeapon GREATHAMMER = new Greathammer(30, 30, 0f, 2f, 2);
 
-	//Armor Constructor: weight, resistance
+	//Armor Constructor to instantiate all armors: weight, resistance
 	static IArmor MAGIC_ARMOR = new MagicArmor(10, 12);
 	static IArmor RAGS_ARMOR = new RagsArmor(8, 6);
 	static IArmor LIGHT_ARMOR = new LightArmor(20, 8);
@@ -29,11 +36,29 @@ public class GameManager : MonoBehaviour
 	static IArmor HEAVY_ARMOR = new HeavyArmor(45, 20);
 	static IArmor TANK_ARMOR = new TankArmor(60, 30);
 
-	ICombatant player;
+	public static int BASEHEALTH = 10;
+	public static int HEALTHVITMODIFIER = 2;
+	public static int BASEWEIGHTLIMIT = 20;
+	public static int WEIGHTLIMITSTRMODIFIER = 2;
+	public static int BASEMOVEPOINTS = 5;
+	public static int MOVEPOINTSDEXMODIFIER = 5;
+	public static int MOVEPOINTSWEIGHTMODIFIER = 10;
+
+	public ICombatant player;
 
 	void Awake()
     {
-		//Enemy constructor: vit, int, str, weight
+		//Singleton pattern
+		if (INSTANCE != null && INSTANCE != this)
+		{
+			Destroy(gameObject);
+		}
+		else
+		{
+			INSTANCE = this;
+		}
+
+		//(example) Enemy constructor: vit, int, str, weight
 		ICombatant enemy1 = new Enemy(2, 2, 2, 30);
     }
 
@@ -42,6 +67,7 @@ public class GameManager : MonoBehaviour
         
     }
 
+	//This method instantiates a player with the right stats for his class at the start of the game
 	void ChooseClass(PlayerClass playerClass)
 	{
 		switch (playerClass)

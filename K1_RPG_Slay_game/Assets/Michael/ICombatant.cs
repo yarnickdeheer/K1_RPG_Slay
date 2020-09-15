@@ -1,5 +1,6 @@
 ﻿public interface ICombatant : IDamageable
 {
+	//the level of the combatant
 	int Level { get; set; }
 
 	//primary stats

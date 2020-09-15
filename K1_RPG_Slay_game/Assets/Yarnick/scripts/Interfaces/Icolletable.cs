@@ -4,8 +4,8 @@ using UnityEngine;
 
 public interface Icolletable
 {
-  //int Weight { get; set; }
-  int Rarity { get; set; }
-  int _itemId { get; set; }
-  void CollectItem();
+    //int Weight { get; set; }
+    int Rarity { get; set; }
+    int ItemId { get; set; }
+    void CollectItem();
 }
