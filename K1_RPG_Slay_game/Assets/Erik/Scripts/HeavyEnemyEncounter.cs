@@ -2,52 +2,50 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HeavyEnemyEncounter : IMapEncounter, ISpawnable
+public class HeavyEnemyEncounter : EnemyEncounter, IMapEncounter, ISpawnable
 {
-    //Discuss: Most likely would be better to use inheritance for enemy encounter types since a lot of functions are (alsmost) the same.
-
     //TODO: Double check code conventions.
     
-    public int Difficulty { get; set; }
-    private GameObject _enemyMapObject;
+    //DISCUSS: Can this be done better? Does the code from EnemyEncounter need to be moved to this class instead? And are these overrides even needed here?
 
     public HeavyEnemyEncounter()
     {
-        OnEnemyCreate();
+        OnEnemyCreate(EnemyType.HEAVY_ENEMY);
+        base.SetDifficulty(2);
     }
 
-    public void OnSelect()
+    public override int GetDifficulty()
     {
-        //TODO: Selection of encounter
-        Debug.Log("SELECTING HEAVY ENEMY");
+        return base.GetDifficulty();
     }
 
-    public void OnDeselect()
+    public override void OnSelect()
     {
-        //TODO: Selection of encounter
-        Debug.Log("Deselecting HEAVY ENEMY");
+        base.OnSelect();
     }
 
-    public void PickSelection()
+    public override void OnDeselect()
     {
-        //TODO: Confirmation Selection of encounter
-        Debug.Log("PICKING HEAVY ENEMY FOR FIGHT");
+        base.OnDeselect();
     }
 
-    private void OnEnemyCreate()
+    public override void PickSelection()
     {
-        _enemyMapObject = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/HeavyEnemyPrefab"));
-        DisableGameobject();
+        base.PickSelection();
     }
 
-    public void EnableGameobject(Vector2 position)
+    public override void OnEnemyCreate(EnemyType enemyType)
     {
-        _enemyMapObject.SetActive(true);
-        _enemyMapObject.transform.position = position;
+        base.OnEnemyCreate(enemyType);
     }
 
-    public void DisableGameobject()
+    public override void EnableGameobject(Vector2 position)
     {
-        _enemyMapObject.SetActive(false);
+        base.EnableGameobject(position);
+    }
+
+    public override void DisableGameobject()
+    {
+        base.DisableGameobject();
     }
 }

@@ -2,51 +2,50 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LightEnemyEncounter : IMapEncounter, ISpawnable
+public class LightEnemyEncounter : EnemyEncounter, IMapEncounter, ISpawnable
 {
-    //Discuss: Most likely would be better to use inheritance for enemy encounter types since a lot of functions are (alsmost) the same.
-
     //TODO: Double check code conventions.
 
-    public int Difficulty { get; set; }
-    private GameObject enemyMapObject;
+    //DISCUSS: Can this be done better? Does the code from EnemyEncounter need to be moved to this class instead? And are these overrides even needed here?
 
     public LightEnemyEncounter()
     {
-        OnEnemyCreate();
+        OnEnemyCreate(EnemyType.LIGHT_ENEMY);
+        base.SetDifficulty(1);
     }
 
-    public void OnSelect()
+    public override int GetDifficulty()
     {
-        //TODO: Selection of encounter
-        Debug.Log("SELECTING LIGHT ENEMY");
+        return base.GetDifficulty();
     }
 
-    public void OnDeselect()
+    public override void OnSelect()
     {
-        Debug.Log("Deselecting LIGHT ENEMY");
+        base.OnSelect();
     }
 
-    public void PickSelection()
+    public override void OnDeselect()
     {
-        //TODO: Confirmation Selection of encounter
-        Debug.Log("PICKING LIGHT ENEMY FOR FIGHT");
+        base.OnDeselect();
     }
 
-    private void OnEnemyCreate()
+    public override void PickSelection()
     {
-        enemyMapObject = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/LightEnemyPrefab"));
-        DisableGameobject();
+        base.PickSelection();
     }
 
-    public void EnableGameobject(Vector2 position)
+    public override void OnEnemyCreate(EnemyType enemyType)
     {
-        enemyMapObject.SetActive(true);
-        enemyMapObject.transform.position = position;
+        base.OnEnemyCreate(enemyType);
     }
 
-    public void DisableGameobject()
+    public override void EnableGameobject(Vector2 position)
     {
-        enemyMapObject.SetActive(false);
+        base.EnableGameobject(position);
+    }
+
+    public override void DisableGameobject()
+    {
+        base.DisableGameobject();
     }
 }

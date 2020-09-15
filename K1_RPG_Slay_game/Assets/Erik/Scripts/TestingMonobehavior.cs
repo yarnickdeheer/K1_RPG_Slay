@@ -6,14 +6,16 @@ public class TestingMonobehavior : MonoBehaviour
 {
     //DISCUSS: How will we handle the input? (This MonoBehaviour is temporary for testing)
 
-    MapDisplay map = new MapDisplay();
-    EncounterManager enc = new EncounterManager();
+    EncounterManager enc; 
 
     private int _selection = 3;
 
     // Start is called before the first frame update
+
     void Start()
     {
+        enc = new EncounterManager();
+        enc.SpawnPlayer();
         enc.CreateNextFloor();
     }
 
@@ -34,6 +36,7 @@ public class TestingMonobehavior : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && _selection != 3)
         {
             enc.ConfirmSelection(_selection);
+            _selection = 3;
         }
     }
 }

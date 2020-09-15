@@ -7,4 +7,7 @@ using UnityEngine;
 public interface IMapEncounter: IPickable, ISpawnable
 {
     int Difficulty { get; set; }
+
+    int GetDifficulty();
+    void SetDifficulty(int _diff);
 }
