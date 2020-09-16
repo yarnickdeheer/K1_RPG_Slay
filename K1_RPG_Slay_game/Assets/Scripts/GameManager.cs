@@ -17,6 +17,10 @@ public class GameManager : MonoBehaviour
 			get { return INSTANCE; }
 		}
 
+	//Definitions for other Managers
+	public EncounterManager _em;
+	public InputManager _im;
+
 	//Weapon Constructor to instantiate all weapons: weight, baseDamage, strScaling, dexScaling
 	//DISCUSS: Another option is making a base class Weapon and adding an enum/type of for example rapier
 	static IWeapon RAPIER = new Rapier(6, 10, 2, 0, 1);
@@ -61,12 +65,22 @@ public class GameManager : MonoBehaviour
 
 		//(example) Enemy constructor: vit, int, str, weight
 		ICombatant enemy1 = new Enemy(2, 2, 2, 30);
-    }
+
+		//Instantiate the managers
+		_em = new EncounterManager();
+		_im = new InputManager();
+
+		//Manager awake functionality
+		_im.AddEm();
+		//TODO: this functionality needs to be executed whenever the player is placed on the map, not at startup
+		_em.SpawnPlayer();
+		_em.CreateNextFloor();
+	}
 
     void Update()
     {
-        
-    }
+		_im.UpdateInputs();
+	}
 
 	//This method instantiates a player with the right stats for his class at the start of the game
 	void ChooseClass(PlayerClass playerClass)

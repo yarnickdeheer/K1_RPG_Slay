@@ -5,7 +5,6 @@ using UnityEngine;
 public class TestingMonobehavior : MonoBehaviour
 {
     //DISCUSS: How will we handle the input? (This MonoBehaviour is temporary for testing)
-
     EncounterManager enc; 
 
     private int _selection = 3;
@@ -21,6 +20,7 @@ public class TestingMonobehavior : MonoBehaviour
 
     private void Update()
     {
+        //moved this to the inputmanager
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             _selection = 0;

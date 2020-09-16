@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class EncounterManager
@@ -9,7 +10,7 @@ public class EncounterManager
     public int FloorNumber { get; set; }
     private int _maxEncounterOptions = 2; //The amount of enemies to choose from. If we want more of them, we probably have to change more code. Default is 2
 
-    private MapDisplay _encounterMap = new MapDisplay();
+    private MapDisplay _encounterMap;
 
     private Vector2 _lastEnemyLocation = new Vector2(0,-3.5f);
 
@@ -28,6 +29,7 @@ public class EncounterManager
 
     public void SpawnPlayer()
     {
+        _encounterMap = new MapDisplay();
         _encounterMap.PlacePlayer(); //Communicate with the MapDisplay class to spawn the player.a
     }
 
