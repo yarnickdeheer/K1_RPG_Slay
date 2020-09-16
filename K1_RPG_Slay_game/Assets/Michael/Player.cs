@@ -81,6 +81,24 @@ public class Player : IPlayer
 
 	private void AllocateStats(int points)
 	{
+		//TODO: give the player the choice to increase a stat
+		//depending on input:
 
+		//for (int i = points; i--; i = 0)
+		//{
+		//Check the input with for example an IEnumerator
+		//StartCoroutine(WaitForPlayerInput);
+		//vit++;
+		//str++;
+		//dex++;
+		//}
 	}
+	//an example to detect input:
+	//private IEnumerator WaitForPlayerInput(keyCode key)
+	//{
+	//if (Input.anyKeyDown)
+	//yield return Input.inputString;
+	//else
+	//yield return null;
+	//}
 }
