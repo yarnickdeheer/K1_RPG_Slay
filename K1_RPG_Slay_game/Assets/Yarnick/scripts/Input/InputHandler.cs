@@ -4,5 +4,9 @@ using UnityEngine;
 
 public class InputHandler 
 {
-   
+   private void OnUpdate()
+    {
+
+    }
+    
 }
