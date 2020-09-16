@@ -15,6 +15,8 @@ public class Enemy : IEnemy
 
 	//IEnemy Implementation
 	public int XpWorth { get; set; }
+	public int Damage { get; set; }
+	public int Resistance { get; set; }
 
 	//Constructor
 	public Enemy(int vit, int str, int dex, int weight)
@@ -32,6 +34,10 @@ public class Enemy : IEnemy
 			(weight - WeightLimit) / GameManager.MOVEPOINTSWEIGHTMODIFIER);
 
 		XpWorth = Level * 10;
+
+		//calculate the damage and the resistance
+		Damage = (int) Mathf.Floor(Level / 2);
+		Resistance = (int) Mathf.Floor(Level / 2);
 	}
 
 	public void TakeDamage()
