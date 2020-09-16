@@ -10,17 +10,17 @@ public class InputManager
         _em = GameManager.Instance._em;
     }
 
-    public void UpdateInputs()
+    public void UpdateInputs(int maxOptions)
     {
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        if (Input.GetKeyDown(KeyCode.LeftArrow) && _selection != 0)
         {
-            _selection = 0;
+            _selection -= 1;
             _em.SelectEncounter(_selection);
             _em.DeselectEncounter(1);
         }
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        if (Input.GetKeyDown(KeyCode.RightArrow) && _selection <= maxOptions)
         {
-            _selection = 1;
+            _selection += 1;
             _em.SelectEncounter(_selection);
             _em.DeselectEncounter(0);
         }

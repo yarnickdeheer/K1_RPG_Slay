@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum PlayerClass
 {
@@ -40,6 +41,7 @@ public class GameManager : MonoBehaviour
 	static IArmor HEAVY_ARMOR = new HeavyArmor(45, 20);
 	static IArmor TANK_ARMOR = new TankArmor(60, 30);
 
+	//Base formula numbers used in calculations for secondary stats
 	public static int BASEHEALTH = 10;
 	public static int HEALTHVITMODIFIER = 2;
 	public static int BASEWEIGHTLIMIT = 20;
@@ -51,7 +53,10 @@ public class GameManager : MonoBehaviour
 	public ICombatant _player;
 	public ICombatant _currentEnemy;
 
-	void Awake()
+	//maxOptions for the input manager, at the start when you choose a class you have 3 options
+	private int _maxOptions = 3;
+	
+	private void Awake()
     {
 		//Singleton pattern
 		if (INSTANCE != null && INSTANCE != this)
@@ -63,8 +68,8 @@ public class GameManager : MonoBehaviour
 			INSTANCE = this;
 		}
 
-		//(example) Enemy constructor: vit, int, str, weight
-		ICombatant enemy1 = new Enemy(2, 2, 2, 30);
+		//(example) Enemy constructor: vit, str, dex, weight
+		//ICombatant enemy1 = new Enemy(2, 2, 2, 30);
 
 		//Instantiate the managers
 		_em = new EncounterManager();
@@ -72,18 +77,65 @@ public class GameManager : MonoBehaviour
 
 		//Manager awake functionality
 		_im.AddEm();
-		//TODO: this functionality needs to be executed whenever the player is placed on the map, not at startup
+		//TODO: this functionality needs to be executed whenever the player is placed in scene, not at startup
 		_em.SpawnPlayer();
 		_em.CreateNextFloor();
 	}
 
-    void Update()
+    private void Update()
     {
-		_im.UpdateInputs();
+		_im.UpdateInputs(_maxOptions);
+	}
+
+	//This function should be called to switch a Scene
+	//TODO: find a better way to detect when to execute certain code
+	public void SceneSwitch()
+	{
+		Scene scene = SceneManager.GetActiveScene();
+		
+		//temporary
+		SceneManager.LoadScene(scene.buildIndex + 1);
+
+		/*
+		switch (scene.buildIndex)
+		{
+			case 0:
+				SceneManager.LoadScene(scene.buildIndex + 1);
+				break;
+			case 1:
+				SceneManager.LoadScene(scene.buildIndex + 1);
+				break;
+			case 2:
+				if (item)
+					//go to item switch
+					SceneManager.LoadScene(scene.buildIndex + 1);
+				else
+					//back to map
+					SceneManager.LoadScene(scene.buildIndex - 1);
+				break;
+			case 3:
+				if (level up)
+					//go to level up
+					SceneManager.LoadScene(scene.buildIndex + 1);
+				else
+					//back to map
+					SceneManager.LoadScene(scene.buildIndex - 2);
+				break;
+			case 4:
+				//back to map
+				SceneManager.LoadScene(scene.buildIndex - 3);
+				break;
+		}
+		*/
+
+		if (scene.buildIndex == 1)
+		{
+			_maxOptions = 2;
+		}
 	}
 
 	//This method instantiates a player with the right stats for his class at the start of the game
-	void ChooseClass(PlayerClass playerClass)
+	public void ChooseClass(PlayerClass playerClass)
 	{
 		switch (playerClass)
 		{
