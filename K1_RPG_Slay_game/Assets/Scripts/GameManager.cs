@@ -44,7 +44,8 @@ public class GameManager : MonoBehaviour
 	public static int MOVEPOINTSDEXMODIFIER = 5;
 	public static int MOVEPOINTSWEIGHTMODIFIER = 10;
 
-	public ICombatant player;
+	public ICombatant _player;
+	public ICombatant _currentEnemy;
 
 	void Awake()
     {
@@ -73,13 +74,13 @@ public class GameManager : MonoBehaviour
 		switch (playerClass)
 		{
 			case PlayerClass.VITOP:
-				player = new Player(5, 1, 1, playerClass, SWORD, LEATHER_ARMOR);
+				_player = new Player(5, 1, 1, playerClass, SWORD, LEATHER_ARMOR);
 				break;
 			case PlayerClass.STRONK:
-				player = new Player(1, 5, 1, playerClass, GREATSWORD, SOLDIER_ARMOR);
+				_player = new Player(1, 5, 1, playerClass, GREATSWORD, SOLDIER_ARMOR);
 				break;
 			case PlayerClass.DEXEUS:
-				player = new Player(1, 1, 5, playerClass, SHORTSWORD, LIGHT_ARMOR);
+				_player = new Player(1, 1, 5, playerClass, SHORTSWORD, LIGHT_ARMOR);
 				break;
 			default:
 				Debug.Log("Invalid player class was chosen");

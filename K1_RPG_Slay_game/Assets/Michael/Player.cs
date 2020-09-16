@@ -93,6 +93,7 @@ public class Player : IPlayer
 		//dex++;
 		//}
 	}
+
 	//an example to detect input:
 	//private IEnumerator WaitForPlayerInput(keyCode key)
 	//{
