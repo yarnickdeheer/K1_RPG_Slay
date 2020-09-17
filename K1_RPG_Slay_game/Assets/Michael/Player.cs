@@ -81,6 +81,7 @@ public class Player : IPlayer
 
 	private void AllocateStats(int points)
 	{
+		GameManager.Instance.SceneSwitch();
 		//TODO: give the player the choice to increase a stat
 		//depending on input:
 

@@ -93,44 +93,51 @@ public class GameManager : MonoBehaviour
 	{
 		Scene scene = SceneManager.GetActiveScene();
 		
-		//temporary
-		SceneManager.LoadScene(scene.buildIndex + 1);
-
-		/*
+		//TODO: detect when we get an item, and when we level up
 		switch (scene.buildIndex)
 		{
-			case 0:
+			case 0: //go to map
+				_maxOptions = 2;
 				SceneManager.LoadScene(scene.buildIndex + 1);
 				break;
-			case 1:
+			case 1: //go to battle
+				_maxOptions = 3;
 				SceneManager.LoadScene(scene.buildIndex + 1);
 				break;
 			case 2:
-				if (item)
-					//go to item switch
+				if (/*item*/true)
+				{ //go to item switch
+					_maxOptions = 2;
 					SceneManager.LoadScene(scene.buildIndex + 1);
+				}
+				else if (/*death*/ true)
+				{ //restart the game
+					_maxOptions = 3;
+					SceneManager.LoadScene(scene.buildIndex - 2);
+				}
 				else
-					//back to map
+				{ //back to map
+					_maxOptions = 2;
 					SceneManager.LoadScene(scene.buildIndex - 1);
+				}
 				break;
 			case 3:
-				if (level up)
-					//go to level up
+				if (/*level up*/true)
+				{ //go to level up
+					_maxOptions = 3;
 					SceneManager.LoadScene(scene.buildIndex + 1);
+				}
 				else
-					//back to map
+				{ //back to map
+
+					_maxOptions = 2;
 					SceneManager.LoadScene(scene.buildIndex - 2);
+				}
 				break;
-			case 4:
-				//back to map
+			case 4: //back to map
+				_maxOptions = 2;
 				SceneManager.LoadScene(scene.buildIndex - 3);
 				break;
-		}
-		*/
-
-		if (scene.buildIndex == 1)
-		{
-			_maxOptions = 2;
 		}
 	}
 
