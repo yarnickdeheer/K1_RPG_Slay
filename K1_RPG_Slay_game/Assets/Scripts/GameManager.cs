@@ -125,6 +125,60 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
     }
+    
+	//This function should be called to switch a Scene
+	//TODO: find a better way to detect when to execute certain code
+	public void SceneSwitch()
+	{
+		Scene scene = SceneManager.GetActiveScene();
+		
+		//TODO: detect when we get an item, and when we level up
+		switch (scene.buildIndex)
+		{
+			case 0: //go to map
+				_maxOptions = 2;
+				SceneManager.LoadScene(scene.buildIndex + 1);
+				break;
+			case 1: //go to battle
+				_maxOptions = 3;
+				SceneManager.LoadScene(scene.buildIndex + 1);
+				break;
+			case 2:
+				if (/*item*/true)
+				{ //go to item switch
+					_maxOptions = 2;
+					SceneManager.LoadScene(scene.buildIndex + 1);
+				}
+				else if (/*death*/ true)
+				{ //restart the game
+					_maxOptions = 3;
+					SceneManager.LoadScene(scene.buildIndex - 2);
+				}
+				else
+				{ //back to map
+					_maxOptions = 2;
+					SceneManager.LoadScene(scene.buildIndex - 1);
+				}
+				break;
+			case 3:
+				if (/*level up*/true)
+				{ //go to level up
+					_maxOptions = 3;
+					SceneManager.LoadScene(scene.buildIndex + 1);
+				}
+				else
+				{ //back to map
+
+					_maxOptions = 2;
+					SceneManager.LoadScene(scene.buildIndex - 2);
+				}
+				break;
+			case 4: //back to map
+				_maxOptions = 2;
+				SceneManager.LoadScene(scene.buildIndex - 3);
+				break;
+		}
+	}
 
 	//This method instantiates a player with the right stats for his class at the start of the game
 	public void ChooseClass(PlayerClass playerClass)
