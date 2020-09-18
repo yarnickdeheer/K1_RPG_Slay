@@ -16,17 +16,18 @@ public class InputManager
 
     public void UpdateInputs(int maxOptions)
     {
+        //TODO: This input should only be checked on the Encounter Map scene
         if (Input.GetKeyDown(KeyCode.LeftArrow) && _selection != 0)
         {
+            _selection = 0;
             OnLeftButtonPressed?.Invoke();
-            _selection -= 1;
             _em.SelectEncounter(_selection);
             _em.DeselectEncounter(1);
         }
         if (Input.GetKeyDown(KeyCode.RightArrow) && _selection <= maxOptions)
         {
+            _selection = 1;
             OnRightButtonPressed?.Invoke();
-            _selection += 1;
             _em.SelectEncounter(_selection);
             _em.DeselectEncounter(0);
         }

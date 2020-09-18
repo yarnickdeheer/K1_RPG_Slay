@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public enum PlayerClass
@@ -53,6 +54,8 @@ public class GameManager : MonoBehaviour
 	public ICombatant _player;
 	public ICombatant _currentEnemy;
 
+    private int _currentSceneID = 0;
+
 	//maxOptions for the input manager, at the start when you choose a class you have 3 options
 	private int _maxOptions = 3;
 	
@@ -77,16 +80,52 @@ public class GameManager : MonoBehaviour
 
 		//Manager awake functionality
 		_im.AddEm();
-		//TODO: this functionality needs to be executed whenever the player is placed in scene, not at startup
-		_em.SpawnPlayer();
-		_em.CreateNextFloor();
-	}
+    }
 
     private void Update()
     {
+        if(_currentSceneID != SceneManager.GetActiveScene().buildIndex)
+        {
+            int sceneID = SceneManager.GetActiveScene().buildIndex;
+            if (sceneID == 1)
+            {
+                _em.SpawnPlayer();
+                _em.CreateNextFloor();
+            }
+
+            _currentSceneID = sceneID;
+        }
+
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            int sceneToLoad = _currentSceneID + 1;
+            StartCoroutine(SceneSwitchAsync(sceneToLoad));
+        }
+
 		_im.UpdateInputs(_maxOptions);
 	}
 
+    //This function should be called to switch a Scene
+    private IEnumerator SceneSwitchAsync(int sceneID)
+    {
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneID);
+
+        // Wait until the asynchronous scene fully loads
+        while (!asyncLoad.isDone)
+        {
+            if (asyncLoad.progress >= 0.9f)
+            {
+                asyncLoad.allowSceneActivation = true;
+            }
+            else
+            {
+                asyncLoad.allowSceneActivation = false;
+            }
+
+            yield return null;
+        }
+    }
+    
 	//This function should be called to switch a Scene
 	//TODO: find a better way to detect when to execute certain code
 	public void SceneSwitch()
