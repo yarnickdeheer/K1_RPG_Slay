@@ -19,7 +19,7 @@ public class CombatHandler : IcombatHandler
     {
         // we need to know speed of player and enemy to see who attacks first
 
-        if (_gameManager.player.MovePoints > _gameManager.player.MovePoints)
+        if (_gameManager._player.MovePoints > _gameManager._player.MovePoints)
         {
             _distance = _enemyPos - _playerPos;
             PlayerTurn = true;
@@ -98,7 +98,7 @@ public class CombatHandler : IcombatHandler
     }
     public void Attack(ICombatant fighter1, ICombatant fighter2)
     {
-        if (fighter1 == _gameManager.player)
+        if (fighter1 == _gameManager._player)
         {
 
             fighter2.Health -= Mathf.RoundToInt( Weapon.BaseDamage + (1 * fighter1.Str * Weapon.StrScaling) + (1 * fighter1.Dex * Weapon.DexScaling));

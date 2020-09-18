@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public enum PlayerClass
@@ -53,6 +54,8 @@ public class GameManager : MonoBehaviour
 	public ICombatant _player;
 	public ICombatant _currentEnemy;
 
+    private int _currentSceneID = 0;
+
 	//maxOptions for the input manager, at the start when you choose a class you have 3 options
 	private int _maxOptions = 3;
 	
@@ -77,62 +80,51 @@ public class GameManager : MonoBehaviour
 
 		//Manager awake functionality
 		_im.AddEm();
-		//TODO: this functionality needs to be executed whenever the player is placed in scene, not at startup
-		_em.SpawnPlayer();
-		_em.CreateNextFloor();
-	}
+    }
 
     private void Update()
     {
+        if(_currentSceneID != SceneManager.GetActiveScene().buildIndex)
+        {
+            int sceneID = SceneManager.GetActiveScene().buildIndex;
+            if (sceneID == 1)
+            {
+                _em.SpawnPlayer();
+                _em.CreateNextFloor();
+            }
+
+            _currentSceneID = sceneID;
+        }
+
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            int sceneToLoad = _currentSceneID + 1;
+            StartCoroutine(SceneSwitchAsync(sceneToLoad));
+        }
+
 		_im.UpdateInputs(_maxOptions);
 	}
 
-	//This function should be called to switch a Scene
-	//TODO: find a better way to detect when to execute certain code
-	public void SceneSwitch()
-	{
-		Scene scene = SceneManager.GetActiveScene();
-		
-		//temporary
-		SceneManager.LoadScene(scene.buildIndex + 1);
+    //This function should be called to switch a Scene
+    private IEnumerator SceneSwitchAsync(int sceneID)
+    {
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneID);
 
-		/*
-		switch (scene.buildIndex)
-		{
-			case 0:
-				SceneManager.LoadScene(scene.buildIndex + 1);
-				break;
-			case 1:
-				SceneManager.LoadScene(scene.buildIndex + 1);
-				break;
-			case 2:
-				if (item)
-					//go to item switch
-					SceneManager.LoadScene(scene.buildIndex + 1);
-				else
-					//back to map
-					SceneManager.LoadScene(scene.buildIndex - 1);
-				break;
-			case 3:
-				if (level up)
-					//go to level up
-					SceneManager.LoadScene(scene.buildIndex + 1);
-				else
-					//back to map
-					SceneManager.LoadScene(scene.buildIndex - 2);
-				break;
-			case 4:
-				//back to map
-				SceneManager.LoadScene(scene.buildIndex - 3);
-				break;
-		}
-		*/
+        // Wait until the asynchronous scene fully loads
+        while (!asyncLoad.isDone)
+        {
+            if (asyncLoad.progress >= 0.9f)
+            {
+                asyncLoad.allowSceneActivation = true;
+            }
+            else
+            {
+                asyncLoad.allowSceneActivation = false;
+            }
 
-		if (scene.buildIndex == 1)
-		{
-			_maxOptions = 2;
-		}
-	}
+            yield return null;
+        }
+    }
 
 	//This method instantiates a player with the right stats for his class at the start of the game
 	public void ChooseClass(PlayerClass playerClass)
