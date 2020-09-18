@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RewardChoice : Icolletable
+public class RewardChoice : IColletable
 {
     public int Rarity { get; set; }
     public int ItemId { get; set; }
