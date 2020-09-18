@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface ICombatHandler
+public class EnemyBehaviour
 {
-    bool PlayerTurn { get; set; }
-    //test
+
 
 }

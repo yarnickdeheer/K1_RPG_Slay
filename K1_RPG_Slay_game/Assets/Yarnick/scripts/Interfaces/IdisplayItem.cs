@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public interface IdisplayItem
+public interface IDisplayItem
 {
     Image ItemImage { get; set; }
     int ItemId { get; set; }

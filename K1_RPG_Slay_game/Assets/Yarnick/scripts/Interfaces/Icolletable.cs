@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface Icolletable
+public interface IColletable
 {
     //int Weight { get; set; }
     int Rarity { get; set; }
