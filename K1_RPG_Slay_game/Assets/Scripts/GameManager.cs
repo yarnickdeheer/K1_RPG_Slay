@@ -23,6 +23,9 @@ public class GameManager : MonoBehaviour
 	public EncounterManager _em;
 	public InputManager _im;
 
+	//defining a SelectButton for the input
+	public SelectButton _selectButton;
+
 	//Weapon Constructor to instantiate all weapons: weight, baseDamage, strScaling, dexScaling
 	//DISCUSS: Another option is making a base class Weapon and adding an enum/type of for example rapier
 	static IWeapon RAPIER = new Rapier(6, 10, 2, 0, 1);
@@ -54,13 +57,8 @@ public class GameManager : MonoBehaviour
 	public ICombatant _player;
 	public ICombatant _currentEnemy;
 
-	//instantiating a SelectButton for the input
-	public SelectButton selectButton;
-
-	private int _currentSceneID = 0;
-
-	//maxOptions for the input manager, at the start when you choose a class you have 3 options
-	private int _maxOptions = 3;
+	private Scene _currentScene;
+	private int _currentSceneID;
 	
 	private void Awake()
     {
@@ -78,40 +76,30 @@ public class GameManager : MonoBehaviour
 		//ICombatant enemy1 = new Enemy(2, 2, 2, 30);
 
 		//Instantiate objects
-		_em = new EncounterManager();
 		_im = new InputManager();
-		selectButton = new SelectButton(Resources.Load<Sprite>("Sprites/PlayerSelect"), 
+		_selectButton = new SelectButton(Resources.Load<Sprite>("Sprites/PlayerSelect"), 
 			Resources.Load<Sprite>("Sprites/PlayerDeselect"), 
 			Resources.Load<GameObject>("Prefabs/Button"));
 
 		//Manager awake functionality
 		_im.AddEm();
-		_im.OnLeftButtonPressed += selectButton.SelectedActionLeft;
-		_im.OnRightButtonPressed += selectButton.SelectedActionRight;
-		_im.OnSelectButtonPressed += selectButton.Use;
-	}
+		_im.OnLeftButtonPressed += _selectButton.SelectedActionLeft;
+		_im.OnRightButtonPressed += _selectButton.SelectedActionRight;
+		_im.OnSelectButtonPressed += _selectButton.Use;
+
+		_currentScene = SceneManager.GetActiveScene();
+		_currentSceneID = _currentScene.buildIndex;
+}
 
     private void Update()
     {
-        if(_currentSceneID != SceneManager.GetActiveScene().buildIndex)
-        {
-            int sceneID = SceneManager.GetActiveScene().buildIndex;
-            if (sceneID == 1)
-            {
-                _em.SpawnPlayer();
-                _em.CreateNextFloor();
-            }
-
-            _currentSceneID = sceneID;
-        }
-
         if (Input.GetKeyDown(KeyCode.T))
         {
             int sceneToLoad = _currentSceneID + 1;
             StartCoroutine(SceneSwitchAsync(sceneToLoad));
         }
 
-		_im.UpdateInputs(_maxOptions);
+		_im.UpdateInputs(_currentScene.buildIndex);
 	}
 
     //This function should be called to switch a Scene
@@ -138,26 +126,27 @@ public class GameManager : MonoBehaviour
 	//This function should be called to switch a Scene
 	public void SceneSwitch()
 	{
-		Scene scene = SceneManager.GetActiveScene();
+		Scene _currentScene = SceneManager.GetActiveScene();
+		Debug.Log(SceneManager.GetActiveScene().buildIndex);
 		
 		//this part of the script knows what scene to switch to
-		switch (scene.buildIndex)
+		switch (_currentScene.buildIndex)
 		{
 			case 0: //go to map
-				_maxOptions = 2;
-				SceneManager.LoadScene(scene.buildIndex + 1);
+				SceneManager.LoadScene(_currentScene.buildIndex + 1);
+				_em = new EncounterManager();
+				_em.SpawnPlayer();
+				_em.CreateNextFloor();
 				break;
 			case 1: //go to battle
-				_maxOptions = 3;
-				SceneManager.LoadScene(scene.buildIndex + 1);
+				SceneManager.LoadScene(_currentScene.buildIndex + 1);
+				_em = null;
 				break;
 			case 2: //go to end screen
-				_maxOptions = 2;
-				SceneManager.LoadScene(scene.buildIndex + 1);
+				SceneManager.LoadScene(_currentScene.buildIndex + 1);
 				break;
 			case 3: //back to map
-				_maxOptions = 2;
-				SceneManager.LoadScene(scene.buildIndex - 2);
+				SceneManager.LoadScene(_currentScene.buildIndex - 2);
 				break;
 		}
 	}

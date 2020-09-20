@@ -53,6 +53,7 @@ public class SelectButton
 	{ //when you press the right button it picks the next option in the list if possible
 		OnDeselect();
 		_actionIndex = Mathf.Min(_actionIndex + 1, _allActions.Count - 1);
+		Debug.Log(_actionIndex);
 		OnSelect();
 	}
 
@@ -60,6 +61,7 @@ public class SelectButton
 	{ //when you press the left button it picks the previous option in the list if possible
 		OnDeselect();
 		_actionIndex = Mathf.Max(_actionIndex - 1, 0);
+		Debug.Log(_actionIndex);
 		OnSelect();
 	}
 
