@@ -17,6 +17,7 @@ public class InputManager
     public void UpdateInputs(int maxOptions)
     {
         //TODO: This input should only be checked on the Encounter Map scene
+		//working on it -michael
         if (Input.GetKeyDown(KeyCode.LeftArrow) && _selection != 0)
         {
             _selection = 0;

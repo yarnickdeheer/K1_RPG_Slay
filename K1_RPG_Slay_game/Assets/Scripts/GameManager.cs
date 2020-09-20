@@ -54,7 +54,10 @@ public class GameManager : MonoBehaviour
 	public ICombatant _player;
 	public ICombatant _currentEnemy;
 
-    private int _currentSceneID = 0;
+	//instantiating a SelectButton for the input
+	public SelectButton selectButton;
+
+	private int _currentSceneID = 0;
 
 	//maxOptions for the input manager, at the start when you choose a class you have 3 options
 	private int _maxOptions = 3;
@@ -74,13 +77,19 @@ public class GameManager : MonoBehaviour
 		//(example) Enemy constructor: vit, str, dex, weight
 		//ICombatant enemy1 = new Enemy(2, 2, 2, 30);
 
-		//Instantiate the managers
+		//Instantiate objects
 		_em = new EncounterManager();
 		_im = new InputManager();
+		selectButton = new SelectButton(Resources.Load<Sprite>("Sprites/PlayerSelect"), 
+			Resources.Load<Sprite>("Sprites/PlayerDeselect"), 
+			Resources.Load<GameObject>("Prefabs/Button"));
 
 		//Manager awake functionality
 		_im.AddEm();
-    }
+		_im.OnLeftButtonPressed += selectButton.SelectedActionLeft;
+		_im.OnRightButtonPressed += selectButton.SelectedActionRight;
+		_im.OnSelectButtonPressed += selectButton.Use;
+	}
 
     private void Update()
     {
@@ -132,7 +141,7 @@ public class GameManager : MonoBehaviour
 	{
 		Scene scene = SceneManager.GetActiveScene();
 		
-		//TODO: detect when we get an item, and when we level up
+		//this part of the script knows what scene to switch to
 		switch (scene.buildIndex)
 		{
 			case 0: //go to map
@@ -143,39 +152,13 @@ public class GameManager : MonoBehaviour
 				_maxOptions = 3;
 				SceneManager.LoadScene(scene.buildIndex + 1);
 				break;
-			case 2:
-				if (/*item*/true)
-				{ //go to item switch
-					_maxOptions = 2;
-					SceneManager.LoadScene(scene.buildIndex + 1);
-				}
-				else if (/*death*/ true)
-				{ //restart the game
-					_maxOptions = 3;
-					SceneManager.LoadScene(scene.buildIndex - 2);
-				}
-				else
-				{ //back to map
-					_maxOptions = 2;
-					SceneManager.LoadScene(scene.buildIndex - 1);
-				}
-				break;
-			case 3:
-				if (/*level up*/true)
-				{ //go to level up
-					_maxOptions = 3;
-					SceneManager.LoadScene(scene.buildIndex + 1);
-				}
-				else
-				{ //back to map
-
-					_maxOptions = 2;
-					SceneManager.LoadScene(scene.buildIndex - 2);
-				}
-				break;
-			case 4: //back to map
+			case 2: //go to end screen
 				_maxOptions = 2;
-				SceneManager.LoadScene(scene.buildIndex - 3);
+				SceneManager.LoadScene(scene.buildIndex + 1);
+				break;
+			case 3: //back to map
+				_maxOptions = 2;
+				SceneManager.LoadScene(scene.buildIndex - 2);
 				break;
 		}
 	}

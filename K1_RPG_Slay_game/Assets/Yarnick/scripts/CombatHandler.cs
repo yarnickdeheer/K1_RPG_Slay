@@ -15,6 +15,7 @@ public class CombatHandler : ICombatHandler
     private int _distance;
     public int _choice; // word later vervangen met de input van de speler
     //public enemy _currentEnemy;
+
     public void WhoStarts()
     {
         _distance = _enemyPos - _playerPos;
@@ -28,11 +29,11 @@ public class CombatHandler : ICombatHandler
         }
     }
 
-
     public void GetInput()
     {
         NextTurn();
     }
+
     public void NextTurn()
     {
         _distance = _enemyPos - _playerPos;
@@ -50,11 +51,9 @@ public class CombatHandler : ICombatHandler
             // display options uit
             PlayerTurn = true;
             EnemyBehaviour(_gameManager._player);
-           
         }
-
-
     }
+
     /// <summary>
     /// wanneer de speler of de AI geen health points meer heeft wordt deze functie aangeroepen die naar de post battle display gaat
     /// </summary>
@@ -66,14 +65,11 @@ public class CombatHandler : ICombatHandler
         // when the enemy is dead go to post battle display as winner
     }
 
-
     /// <summary>
     /// de battle functie kijkt welke keuze de speler of de AI heeft gemaakt op basis daarvan gaat hij kijken of deze actie mogelijk is wanneer niet moet je je keuze opnieuw maken
     /// </summary>
     public void Battle( int fighter1 , int fighter2 , int Dis, int Choice)
     {
-
-
         if (Choice == 1)
         { //(attack)
             if (Weapon.Range <= Dis)
@@ -91,8 +87,6 @@ public class CombatHandler : ICombatHandler
             if (Dis != 1)
             {
                 fighter1++;
-
-
             }
             else
             {
@@ -111,13 +105,13 @@ public class CombatHandler : ICombatHandler
                 Debug.Log("fighter1 staat zo ver achteruit als hij kan");
                 // retake choice
             }
-            if ()
+            if
             {
                 NextTurn();
             }
         }
-
     }
+
     /// <summary>
     /// attack managed de damage die de enemy of de speler krijgt
     /// </summary>
@@ -139,7 +133,6 @@ public class CombatHandler : ICombatHandler
         {
             NextTurn();
         }
-
     }
 
     /// <summary>
@@ -162,7 +155,5 @@ public class CombatHandler : ICombatHandler
             _choice = 3;
             Battle(_playerPos, _enemyPos, _distance, _choice);
         }
-
     }
-
 }

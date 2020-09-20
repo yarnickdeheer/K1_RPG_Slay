@@ -1,13 +1,12 @@
 ﻿using UnityEngine;
 
-public class ClassSelectButton : SelectButton
+public class ClassSelectButton
 {
-	SpriteRenderer _buttonSR;
+	public SpriteRenderer _buttonSR;
 
-	private ClassSelectButton()
+	public ClassSelectButton(GameObject button, float xLocation, float yLocation)
 	{
-		GameObject go = Object.Instantiate(Resources.Load<GameObject>("Prefabs/Button"));
+		GameObject go = Object.Instantiate(button, new Vector3(xLocation, yLocation, 0), Quaternion.identity);
 		_buttonSR = go.GetComponent<SpriteRenderer>();
-		OnCreateButton(go);
 	}
 }
