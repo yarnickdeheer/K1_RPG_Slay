@@ -13,6 +13,13 @@ public class SelectButton
 	public Sprite _buttonDeselected;
 	public GameObject _button;
 
+	/*<summary>
+	This script works on the startscreen scene.
+	It gets input from inputmanager, and that way you can switch which button to press.
+	It executes 'actions' if you press space when a certain button is selected.
+	These actions are saved in _allActions.
+	</summary>*/
+
 	//constructor
 	public SelectButton(Sprite buttonSelected, Sprite buttonDeselected, GameObject button)
 	{
@@ -31,8 +38,8 @@ public class SelectButton
 
 		//make 3 new buttons
 		CreateButton(0, -10.3f, -5f);
-		CreateButton(0, -.3f, -5f);
-		CreateButton(0, 9.6f, -5f);
+		CreateButton(1, -.3f, -5f);
+		CreateButton(2, 9.6f, -5f);
 	}
 
 	//method to make a button
@@ -65,16 +72,19 @@ public class SelectButton
 	public void UseVitopButton()
 	{
 		gm.ChooseClass(PlayerClass.VITOP);
+		gm.SceneSwitch();
 	}
 
 	public void UseStronkButton()
 	{
 		gm.ChooseClass(PlayerClass.STRONK);
+		gm.SceneSwitch();
 	}
 
 	public void UseDexeusButton()
 	{
 		gm.ChooseClass(PlayerClass.DEXEUS);
+		gm.SceneSwitch();
 	}
 
 	//these methods handle the visual aspect of the buttons

@@ -136,7 +136,6 @@ public class GameManager : MonoBehaviour
     }
     
 	//This function should be called to switch a Scene
-	//TODO: find a better way to detect when to execute certain code
 	public void SceneSwitch()
 	{
 		Scene scene = SceneManager.GetActiveScene();

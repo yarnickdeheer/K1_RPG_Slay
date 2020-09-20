@@ -13,7 +13,7 @@ public class CombatDisplay
 
     public void ShowId()
     {
-        // show who's turn it is
+        // show whose turn it is
         // _textTurnId.text = _turnId.ToString();
     }
     public void ShowBattleOptions()

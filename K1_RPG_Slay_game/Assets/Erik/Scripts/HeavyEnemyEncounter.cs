@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class HeavyEnemyEncounter : EnemyEncounter, IMapEncounter, ISpawnable
 {
-    //TODO: Double check code conventions.
-    
     //DISCUSS: Can this be done better? Does the code from EnemyEncounter need to be moved to this class instead? And are these overrides even needed here?
 
     public HeavyEnemyEncounter()
