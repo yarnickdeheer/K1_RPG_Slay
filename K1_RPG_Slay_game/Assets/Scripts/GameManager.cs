@@ -95,6 +95,12 @@ public class GameManager : MonoBehaviour
 			_im.OnRightButtonPressed += _selectButton.SelectedActionRight;
 			_im.OnSelectButtonPressed += _selectButton.Use;
 		}
+		if (_currentScene.buildIndex == 1)
+		{
+			_em = new EncounterManager();
+			_em.SpawnPlayer();
+			_em.CreateNextFloor();
+		}
 	}
 
     private void Update()
@@ -139,9 +145,6 @@ public class GameManager : MonoBehaviour
 		{
 			case 0: //go to map
 				SceneManager.LoadScene(_currentScene.buildIndex + 1);
-				_em = new EncounterManager();
-				_em.SpawnPlayer();
-				_em.CreateNextFloor();
 				break;
 			case 1: //go to battle
 				SceneManager.LoadScene(_currentScene.buildIndex + 1);
