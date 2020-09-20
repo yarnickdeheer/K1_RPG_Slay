@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class EncounterManager
 {
-    //TODO: Check code conventions
-
     public int FloorNumber { get; set; }
     private int _maxEncounterOptions = 2; //The amount of enemies to choose from. If we want more of them, we probably have to change more code. Default is 2
 

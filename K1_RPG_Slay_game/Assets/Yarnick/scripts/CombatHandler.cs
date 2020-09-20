@@ -105,10 +105,10 @@ public class CombatHandler : ICombatHandler
                 Debug.Log("fighter1 staat zo ver achteruit als hij kan");
                 // retake choice
             }
-            if
+            /*if
             {
                 NextTurn();
-            }
+            }*/
         }
     }
 
