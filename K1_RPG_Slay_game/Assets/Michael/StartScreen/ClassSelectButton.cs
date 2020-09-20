@@ -7,10 +7,11 @@ public class ClassSelectButton
 	</summary>*/
 
 	public SpriteRenderer _buttonSR;
+	public GameObject _go;
 
 	public ClassSelectButton(GameObject button, float xLocation, float yLocation)
 	{
-		GameObject go = Object.Instantiate(button, new Vector3(xLocation, yLocation, 0), Quaternion.identity);
-		_buttonSR = go.GetComponent<SpriteRenderer>();
+		_go = Object.Instantiate(button, new Vector3(xLocation, yLocation, 0), Quaternion.identity);
+		_buttonSR = _go.GetComponent<SpriteRenderer>();
 	}
 }
