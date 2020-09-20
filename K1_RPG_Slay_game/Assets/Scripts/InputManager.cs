@@ -11,7 +11,7 @@ public class InputManager
     private EncounterManager _em;
     private int _selection = 3;
 
-    public void AddEm()
+    public InputManager()
 	{
         _em = GameManager.Instance._em;
     }

@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour
 	private int _currentSceneID;
 
 	private void Awake()
-    {
+	{
 		Debug.Log("Initiating GameManager");
 
 		//Singleton pattern
@@ -87,24 +87,21 @@ public class GameManager : MonoBehaviour
 		//This happens here because it's the best way to detect if it's the start of the game, and this needs to happen then
 		if (_currentScene.buildIndex == 0)
 		{
-			_selectButton = new SelectButton(Resources.Load<Sprite>("Sprites/PlayerSelect"), 
+			_selectButton = new SelectButton(Resources.Load<Sprite>("Sprites/PlayerSelect"),
 				Resources.Load<Sprite>("Sprites/PlayerDeselect"),
 				Resources.Load<GameObject>("Prefabs/Button"));
 
 			_im.OnLeftButtonPressed += _selectButton.SelectedActionLeft;
 			_im.OnRightButtonPressed += _selectButton.SelectedActionRight;
 			_im.OnSelectButtonPressed += _selectButton.Use;
-		}	
-
-		//Manager awake functionality
-		_im.AddEm();
-}
+		}
+	}
 
     private void Update()
     {
 		if (Input.GetKeyDown(KeyCode.T))
         {
-            int sceneToLoad = _currentSceneID + 1;
+			int sceneToLoad = _currentSceneID + 1;
             StartCoroutine(SceneSwitchAsync(sceneToLoad));
         }
 
