@@ -4,56 +4,86 @@ using UnityEngine;
 
 public class CombatHandler : ICombatHandler
 {
-    private int _MovesLeft;
-    private bool _TurnConfirmed;
     public bool PlayerTurn { get; set; }
-    public GameManager _gameManager = GameManager.Instance;
     public IWeapon Weapon { get; set; }
+    public GameManager _gameManager = GameManager.Instance;
+    public CombatDisplay _combatDisplay;
+    public int _choice; // word later vervangen met de input van de speler
+    public bool _attacked;
 
     private int _playerPos = 1;
-    private int _enemyPos = 6;
+    private int _enemyPos = 9;
     private int _distance;
-    public int _choice; // word later vervangen met de input van de speler
-    //public enemy _currentEnemy;
+    private int _moveSpeed;// set this value when start the battle
 
+    //public enemy _currentEnemy;
     public void WhoStarts()
     {
         _distance = _enemyPos - _playerPos;
+        _moveSpeed = _gameManager._player.MovePoints;
         if (_gameManager._player.MovePoints > _gameManager._player.MovePoints)
         {
             PlayerTurn = true;
+            // choose in woth the buttons
         }
         else
         {
             PlayerTurn = false;
+            EnemyBehaviour(_gameManager._currentEnemy);
         }
     }
 
-    public void GetInput()
+    public void GetInput(int Choice)
     {
-        NextTurn();
-    }
+        if (_attacked == true && Choice == 1)
+        {
+            //ga terug naar input scherm
+        }
+        if (_moveSpeed <= 0)
+        {
+            if (Choice !=1)
+            {
+                Debug.Log("cant walk anuymore");
+            }
+            else
+            {
+                Battle(_distance, Choice);
+            }
+        }
+        else
+        {
+            Battle(_distance, _choice);
+        }
 
-    public void NextTurn()
+        
+        //NextTurn();
+    }
+    public void EndTurn()
+    {
+        if (_moveSpeed == 0 && _attacked == true)
+        {
+            EnemyTurn();
+        }
+        else
+        {
+            if (PlayerTurn == true)
+            {
+                // go to input
+            }
+            else
+            {
+                EnemyBehaviour(_gameManager._currentEnemy);
+            }
+        }
+
+    }
+    public void EnemyTurn()
     {
         _distance = _enemyPos - _playerPos;
-        if (PlayerTurn == true)
-        {
-            // player start turn
-            // display options aan
-            // eerst moeten we de speler de tijd geven om een keuze te maken 
-            Battle(_playerPos,_enemyPos,_distance,_choice);
-            PlayerTurn = false;
-        }
-        else
-        {
-            // Enemy AI start turn
-            // display options uit
-            PlayerTurn = true;
-            EnemyBehaviour(_gameManager._player);
-        }
-    }
+        PlayerTurn = true;
+        EnemyBehaviour(_gameManager._currentEnemy);
 
+    }
     /// <summary>
     /// wanneer de speler of de AI geen health points meer heeft wordt deze functie aangeroepen die naar de post battle display gaat
     /// </summary>
@@ -65,53 +95,65 @@ public class CombatHandler : ICombatHandler
         // when the enemy is dead go to post battle display as winner
     }
 
+
     /// <summary>
     /// de battle functie kijkt welke keuze de speler of de AI heeft gemaakt op basis daarvan gaat hij kijken of deze actie mogelijk is wanneer niet moet je je keuze opnieuw maken
     /// </summary>
-    public void Battle( int fighter1 , int fighter2 , int Dis, int Choice)
+    public void Battle(int Dis, int Choice)
     {
+
+
         if (Choice == 1)
         { //(attack)
             if (Weapon.Range <= Dis)
             {
-                //  Attack();
+                Attack(_gameManager._player,_gameManager._currentEnemy);
             }
             else
             {
                 //  miss();
                 // retake choice
+                // ga terug naar input scherm
             }
         }
         else if (Choice == 2)
         { //(vooruit)
             if (Dis != 1)
             {
-                fighter1++;
+                Dis--;
+                _moveSpeed--;
+                _combatDisplay.UpdateMoving(Dis,_moveSpeed);
+                // ga terug naar input scherm
+                EndTurn();
             }
             else
             {
                 Debug.Log("fighter1 staat voor de fighter2");
-                // retake choice
+                // ga terug naar input scherm
+                EndTurn();
             }
         }
         else if (Choice == 3)
         { //(achteruit)
             if (Dis < 10)
             {
-                fighter1--;
+                Dis++;
+                _moveSpeed--;
+                _combatDisplay.UpdateMoving(Dis, _moveSpeed);
+                // ga terug naar input scherm
+                EndTurn();
             }
             else
             {
                 Debug.Log("fighter1 staat zo ver achteruit als hij kan");
-                // retake choice
-            }
-            /*if
-            {
-                NextTurn();
-            }*/
-        }
-    }
 
+                // ga terug naar input scherm
+                EndTurn();
+            }
+
+        }
+
+    }
     /// <summary>
     /// attack managed de damage die de enemy of de speler krijgt
     /// </summary>
@@ -119,22 +161,36 @@ public class CombatHandler : ICombatHandler
     {
         if (fighter1 == _gameManager._player)
         {
-            fighter2.Health -= Mathf.RoundToInt( Weapon.BaseDamage + (1 * fighter1.Str * Weapon.StrScaling) + (1 * fighter1.Dex * Weapon.DexScaling));                 
+            fighter2.Health -= Mathf.RoundToInt( Weapon.BaseDamage + (1 * fighter1.Str * Weapon.StrScaling) + (1 * fighter1.Dex * Weapon.DexScaling));
+            _attacked = true;
+            _combatDisplay.UpdateEnemyHealth(fighter2.Health);
+
+
+            if (fighter2.Health <= 0)
+            {
+                EndCombat();
+            }
+            else
+            {
+                // go back to input
+                EndTurn();
+            }
         }
         else
         {
-            fighter2.Health -= Mathf.RoundToInt((1 * fighter1.Str) + (1 * fighter1.Dex));          
-        }
-        if (fighter2.Health <= 0)
-        {
-            EndCombat();
-        }
-        else
-        {
-            NextTurn();
+            fighter2.Health -= Mathf.RoundToInt((1 * fighter1.Str) + (1 * fighter1.Dex));
+            _combatDisplay.UpdatePlayerHealth(fighter2.Health);
+            if (fighter2.Health <= 0)
+            {
+                EndCombat();
+            }
+            else
+            {
+                // go back to input
+                EndTurn();
+            }
         }
     }
-
     /// <summary>
     /// de enemy behaviour gaat kijken wat de keuze gaat zijn voor de AI ennemy 
     /// </summary>
@@ -143,17 +199,23 @@ public class CombatHandler : ICombatHandler
         if (_distance < 2)
         {
             _choice = 1;
-            Battle(_playerPos, _enemyPos, _distance, _choice);
+            Battle(_distance, _choice);
         }
         else if (_distance > 2)
         {
             _choice = 2;
-            Battle(_playerPos, _enemyPos, _distance, _choice);
+            Battle(_distance, _choice);
         }
-        else if ( enemy.Health < 5 &&_distance < Weapon.Range)
+        else if (enemy.Health < 5 && _distance < Weapon.Range)
         {
             _choice = 3;
-            Battle(_playerPos, _enemyPos, _distance, _choice);
+            Battle(_distance, _choice);
         }
+
     }
+
 }
+
+ 
+    
+
