@@ -15,9 +15,9 @@ public class GameManager : MonoBehaviour
 	//Singleton pattern
 	private static GameManager INSTANCE;
 	public static GameManager Instance
-		{
-			get { return INSTANCE; }
-		}
+	{
+		get { return INSTANCE; }
+	}
 
 	//Definitions for other Managers
 	public EncounterManager _em;
@@ -59,9 +59,11 @@ public class GameManager : MonoBehaviour
 
 	private Scene _currentScene;
 	private int _currentSceneID;
-	
+
 	private void Awake()
     {
+		Debug.Log("Initiating GameManager");
+
 		//Singleton pattern
 		if (INSTANCE != null && INSTANCE != this)
 		{
@@ -77,23 +79,30 @@ public class GameManager : MonoBehaviour
 
 		//Instantiate objects
 		_im = new InputManager();
-		_selectButton = new SelectButton(Resources.Load<Sprite>("Sprites/PlayerSelect"), 
-			Resources.Load<Sprite>("Sprites/PlayerDeselect"), 
-			Resources.Load<GameObject>("Prefabs/Button"));
+
+		//Check the current scene
+		_currentScene = SceneManager.GetActiveScene();
+		_currentSceneID = _currentScene.buildIndex;
+
+		//This happens here because it's the best way to detect if it's the start of the game, and this needs to happen then
+		if (_currentScene.buildIndex == 0)
+		{
+			_selectButton = new SelectButton(Resources.Load<Sprite>("Sprites/PlayerSelect"), 
+				Resources.Load<Sprite>("Sprites/PlayerDeselect"),
+				Resources.Load<GameObject>("Prefabs/Button"));
+
+			_im.OnLeftButtonPressed += _selectButton.SelectedActionLeft;
+			_im.OnRightButtonPressed += _selectButton.SelectedActionRight;
+			_im.OnSelectButtonPressed += _selectButton.Use;
+		}	
 
 		//Manager awake functionality
 		_im.AddEm();
-		_im.OnLeftButtonPressed += _selectButton.SelectedActionLeft;
-		_im.OnRightButtonPressed += _selectButton.SelectedActionRight;
-		_im.OnSelectButtonPressed += _selectButton.Use;
-
-		_currentScene = SceneManager.GetActiveScene();
-		_currentSceneID = _currentScene.buildIndex;
 }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.T))
+		if (Input.GetKeyDown(KeyCode.T))
         {
             int sceneToLoad = _currentSceneID + 1;
             StartCoroutine(SceneSwitchAsync(sceneToLoad));
@@ -127,7 +136,6 @@ public class GameManager : MonoBehaviour
 	public void SceneSwitch()
 	{
 		Scene _currentScene = SceneManager.GetActiveScene();
-		Debug.Log(SceneManager.GetActiveScene().buildIndex);
 		
 		//this part of the script knows what scene to switch to
 		switch (_currentScene.buildIndex)
@@ -147,6 +155,8 @@ public class GameManager : MonoBehaviour
 				break;
 			case 3: //back to map
 				SceneManager.LoadScene(_currentScene.buildIndex - 2);
+				break;
+			default:
 				break;
 		}
 	}

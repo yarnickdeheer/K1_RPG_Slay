@@ -43,7 +43,7 @@ public class SelectButton
 	}
 
 	//method to make a button
-	protected void CreateButton(int index, float xLocation, float yLocation)
+	private void CreateButton(int index, float xLocation, float yLocation)
 	{ //create a button and add them in the buttons list
 		_buttons[index] = new ClassSelectButton(_button, xLocation, yLocation);
 	}
@@ -71,32 +71,43 @@ public class SelectButton
 	}
 
 	//the actions in allActions
-	public void UseVitopButton()
+	private void UseVitopButton()
 	{
 		gm.ChooseClass(PlayerClass.VITOP);
+		DestroyButtons();
 		gm.SceneSwitch();
 	}
 
-	public void UseStronkButton()
+	private void UseStronkButton()
 	{
 		gm.ChooseClass(PlayerClass.STRONK);
+		DestroyButtons();
 		gm.SceneSwitch();
 	}
 
-	public void UseDexeusButton()
+	private void UseDexeusButton()
 	{
 		gm.ChooseClass(PlayerClass.DEXEUS);
+		DestroyButtons();
 		gm.SceneSwitch();
 	}
 
 	//these methods handle the visual aspect of the buttons
-	public void OnSelect()
+	private void OnSelect()
 	{
 		_buttons[_actionIndex]._buttonSR.sprite = _buttonSelected;
 	}
 
-	public void OnDeselect()
+	private void OnDeselect()
 	{
 		_buttons[_actionIndex]._buttonSR.sprite = _buttonDeselected;
+	}
+
+	private void DestroyButtons()
+	{
+		for (int i = _buttons.Count; i == 0; i--)
+		{
+			Object.Destroy(_buttons[i]._go);
+		}
 	}
 }
