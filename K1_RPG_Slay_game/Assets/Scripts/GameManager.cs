@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
 
 	//defining a SelectButton for the input
 	public SelectButton _selectButton;
+	public CombatHandler _combatHandler;
 
 	//Weapon Constructor to instantiate all weapons: weight, baseDamage, strScaling, dexScaling
 	//DISCUSS: Another option is making a base class Weapon and adding an enum/type of for example rapier
@@ -90,7 +91,7 @@ public class GameManager : MonoBehaviour
 		{
 			_selectButton = new SelectButton(Resources.Load<Sprite>("Sprites/PlayerSelect"),
 				Resources.Load<Sprite>("Sprites/PlayerDeselect"),
-				Resources.Load<GameObject>("Prefabs/Button"));
+				Resources.Load<GameObject>("Prefabs/Button"),false);
 
 			_im.OnLeftButtonPressed += _selectButton.SelectedActionLeft;
 			_im.OnRightButtonPressed += _selectButton.SelectedActionRight;
@@ -104,6 +105,16 @@ public class GameManager : MonoBehaviour
 			_im.OnLeftButtonPressed += _em.SelectedEncounterLeft;
 			_im.OnRightButtonPressed += _em.SelectedEncounterRight;
 			_im.OnSelectButtonPressed += _em.Use;
+		}
+		else if (_currentScene.buildIndex == 2)
+		{
+			_selectButton = new SelectButton(Resources.Load<Sprite>("Sprites/PlayerSelect"),
+			Resources.Load<Sprite>("Sprites/PlayerDeselect"),
+			Resources.Load<GameObject>("Prefabs/Button"), true);
+			_combatHandler = new CombatHandler(1,false,1,9);
+			_im.OnLeftButtonPressed += _selectButton.SelectedActionLeft;
+			_im.OnRightButtonPressed += _selectButton.SelectedActionRight;
+			_im.OnSelectButtonPressed += _selectButton.Use;
 		}
 	}
 
@@ -185,6 +196,17 @@ public class GameManager : MonoBehaviour
 			default:
 				Debug.Log("Invalid player class was chosen");
 				break;
+		}
+	}
+	public void BattleUIInstantiate()
+	{
+		_im = new InputManager();
+		if (_currentScene.buildIndex == 2)
+		{
+			_selectButton._battle = true;
+			_im.OnLeftButtonPressed += _selectButton.SelectedActionLeft;
+			_im.OnRightButtonPressed += _selectButton.SelectedActionRight;
+			_im.OnSelectButtonPressed += _selectButton.Use;
 		}
 	}
 }

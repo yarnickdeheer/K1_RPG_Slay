@@ -7,11 +7,15 @@ public class SelectButton
 
 	private int _actionIndex = 0;
 	private List<System.Action> _allActions;
+
+	private List<System.Action> _battleActions;
 	private Dictionary<int, ClassSelectButton> _buttons;
 
 	public Sprite _buttonSelected;
 	public Sprite _buttonDeselected;
 	public GameObject _button;
+
+	public bool _battle = false;
 
 	/*<summary>
 	This script works on the startscreen scene.
@@ -21,20 +25,26 @@ public class SelectButton
 	</summary>*/
 
 	//constructor
-	public SelectButton(Sprite buttonSelected, Sprite buttonDeselected, GameObject button)
+	public SelectButton(Sprite buttonSelected, Sprite buttonDeselected, GameObject button , bool battle)
 	{
 		_buttonSelected = buttonSelected;
 		_buttonDeselected = buttonDeselected;
 		_button = button;
+		_battle = battle;
 
 		//instantiate the lists
 		_allActions = new List<System.Action>();
+
+		_battleActions = new List<System.Action>();
 		_buttons = new Dictionary<int, ClassSelectButton>();
 
 		//add the actions
 		_allActions.Add(UseVitopButton);
 		_allActions.Add(UseStronkButton);
 		_allActions.Add(UseDexeusButton);
+		_battleActions.Add(Attack);
+		_battleActions.Add(Wforward);
+		_battleActions.Add(Wback);
 
 		//make 3 new buttons
 		CreateButton(0, -10.3f, -5f);
@@ -65,7 +75,17 @@ public class SelectButton
 
 	public void Use()
 	{ //invoke the current action
-		_allActions[_actionIndex].Invoke();
+		if (_battle == true)
+		{
+
+			_battleActions[_actionIndex].Invoke();
+		} 
+		else
+		{
+
+			_allActions[_actionIndex].Invoke();
+		}
+		
 	}
 
 	//the actions in allActions
@@ -88,6 +108,25 @@ public class SelectButton
 		gm.ChooseClass(PlayerClass.DEXEUS);
 		DestroyButtons();
 		gm.SceneSwitch();
+	}
+	private void Attack()
+	{
+		gm._combatHandler._choice = 1;
+		gm._combatHandler.GetInput(1);
+		DestroyButtons();
+
+	}
+	private void Wforward()
+	{
+		gm._combatHandler._choice = 2;
+		gm._combatHandler.GetInput(2);
+		DestroyButtons();
+	}
+	private void Wback()
+	{
+		gm._combatHandler._choice = 3;
+		gm._combatHandler.GetInput(3);
+		DestroyButtons();
 	}
 
 	//these methods handle the visual aspect of the buttons
