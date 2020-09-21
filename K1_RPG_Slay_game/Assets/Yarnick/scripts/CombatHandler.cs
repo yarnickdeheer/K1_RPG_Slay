@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CombatHandler : ICombatHandler
 {
-    private int _MovesLeft;
-    private bool _TurnConfirmed;
+    private int _movesLeft;
+    private bool _turnConfirmed;
     public bool PlayerTurn { get; set; }
     public GameManager _gameManager = GameManager.Instance;
     public IWeapon Weapon { get; set; }
