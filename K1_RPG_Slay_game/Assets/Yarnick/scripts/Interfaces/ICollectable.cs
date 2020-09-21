@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public interface IColletable
+﻿public interface IColletable
 {
     //int Weight { get; set; }
     int Rarity { get; set; }

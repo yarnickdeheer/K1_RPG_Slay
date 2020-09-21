@@ -17,7 +17,7 @@ public class CombatHandler : ICombatHandler
     private int _moveSpeed;// set this value when start the battle
 
     //public enemy _currentEnemy;
-    public CombatHandler( int choice , bool attacked , int playerpos,int enemypos)
+    public CombatHandler(int choice , bool attacked , int playerpos, int enemypos)
     {
         _choice = choice;
         _attacked = attacked;
@@ -26,6 +26,7 @@ public class CombatHandler : ICombatHandler
 
         _distance = _enemyPos - _playerPos;
     }
+
     public void WhoStarts()
     {
         _distance = _enemyPos - _playerPos;
@@ -66,8 +67,6 @@ public class CombatHandler : ICombatHandler
         {
             Battle(_distance, _choice);
         }
-
-        
         //NextTurn();
     }
     public void EndTurn()
@@ -91,6 +90,7 @@ public class CombatHandler : ICombatHandler
         }
 
     }
+
     public void EnemyTurn()
     {
         _distance = _enemyPos - _playerPos;
@@ -98,6 +98,7 @@ public class CombatHandler : ICombatHandler
         EnemyBehaviour(_gameManager._currentEnemy);
 
     }
+
     /// <summary>
     /// wanneer de speler of de AI geen health points meer heeft wordt deze functie aangeroepen die naar de post battle display gaat
     /// </summary>
@@ -110,14 +111,11 @@ public class CombatHandler : ICombatHandler
         // when the enemy is dead go to post battle display as winner
     }
 
-
     /// <summary>
     /// de battle functie kijkt welke keuze de speler of de AI heeft gemaakt op basis daarvan gaat hij kijken of deze actie mogelijk is wanneer niet moet je je keuze opnieuw maken
     /// </summary>
     public void Battle(int Dis, int Choice)
     {
-
-
         if (Choice == 1)
         { //(attack)
             if (Weapon.Range <= Dis)
@@ -169,16 +167,14 @@ public class CombatHandler : ICombatHandler
             else
             {
                 Debug.Log("fighter1 staat zo ver achteruit als hij kan");
-
                 // ga terug naar input scherm
 
                 //_gameManager.BattleUIInstantiate();
                 EndTurn();
             }
-
         }
-
     }
+
     /// <summary>
     /// attack managed de damage die de enemy of de speler krijgt
     /// </summary>
@@ -189,7 +185,6 @@ public class CombatHandler : ICombatHandler
             fighter2.Health -= Mathf.RoundToInt( Weapon.BaseDamage + (1 * fighter1.Str * Weapon.StrScaling) + (1 * fighter1.Dex * Weapon.DexScaling));
             _attacked = true;
             _combatDisplay.UpdateEnemyHealth(fighter2.Health);
-
 
             if (fighter2.Health <= 0)
             {
@@ -220,6 +215,7 @@ public class CombatHandler : ICombatHandler
             }
         }
     }
+
     /// <summary>
     /// de enemy behaviour gaat kijken wat de keuze gaat zijn voor de AI ennemy 
     /// </summary>
@@ -240,11 +236,5 @@ public class CombatHandler : ICombatHandler
             _choice = 3;
             Battle(_distance, _choice);
         }
-
     }
-
 }
-
- 
-    
-
