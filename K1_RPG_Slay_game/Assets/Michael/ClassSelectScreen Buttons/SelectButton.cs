@@ -78,12 +78,10 @@ public class SelectButton
 	{ //invoke the current action
 		if (_battle == true )
 		{
-
 			_battleActions[_actionIndex].Invoke();
 		} 
 		else
 		{
-
 			_allActions[_actionIndex].Invoke();
 		}
 		
