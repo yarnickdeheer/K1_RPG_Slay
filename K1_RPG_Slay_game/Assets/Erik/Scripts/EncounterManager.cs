@@ -137,7 +137,7 @@ public class EncounterManager
         _activeEnemyPool[_actionIndex].PickSelection(); //confirm selection of this enemy (currently empty)
 
         //The floor number and new floor generation can be called later when the combat is over.
-        CreateNextFloor();
+        //CreateNextFloor();
         FloorNumber++;
     }
 }
