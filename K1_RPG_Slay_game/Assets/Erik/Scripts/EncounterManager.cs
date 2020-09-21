@@ -19,10 +19,22 @@ public class EncounterManager
 
     private List<IMapEncounter> _activeEnemyPool = new List<IMapEncounter>();
 
+    private List<System.Action> _allActions;
+    private int _actionIndex = 0;
+
     //The enemy pools need to be made when the class is created.
     public EncounterManager()
     {
         CreateEnemyPools();
+        SpawnPlayer();
+        CreateNextFloor();
+
+        //instantiate _allActions
+        _allActions = new List<System.Action>();
+
+        //KEEP BOTH: it's the same method added twice, but based on the _actionIndex it behaves differently. If there's only one _actionIndex can't be higher than one.
+        _allActions.Add(ConfirmSelection);
+        _allActions.Add(ConfirmSelection);
     }
 
     public void SpawnPlayer()
@@ -94,19 +106,27 @@ public class EncounterManager
         _activeEnemyPool.Clear();
     }
 
-    public void SelectEncounter(int id)
-    {
-        _activeEnemyPool[id].OnSelect();
+    public void SelectedEncounterRight()
+    { //select the right encounter and also update the visuals
+        _activeEnemyPool[_actionIndex].OnDeselect();
+        _actionIndex = Mathf.Min(_actionIndex + 1, _allActions.Count - 1);
+        _activeEnemyPool[_actionIndex].OnSelect();
+    }
+    public void SelectedEncounterLeft()
+    { //select the left encounter and also update the visuals
+        _activeEnemyPool[_actionIndex].OnDeselect();
+        _actionIndex = Mathf.Max(_actionIndex - 1, 0);
+        _activeEnemyPool[_actionIndex].OnSelect();
     }
 
-    public void DeselectEncounter(int id)
-    {
-        _activeEnemyPool[id].OnDeselect();
+    public void Use()
+    { //invoke the current action
+        _allActions[_actionIndex].Invoke();
     }
 
-    public void ConfirmSelection(int id)
+    public void ConfirmSelection()
     {
-        _lastEnemyLocation = _activeEnemyPool[id].GetPosition(); //If the player wins the next combat, the player's new position will be the position of the defeated enemy.
+        _lastEnemyLocation = _activeEnemyPool[_actionIndex].GetPosition(); //If the player wins the next combat, the player's new position will be the position of the defeated enemy.
 
         /*TODO: Create implementation to the combat system instead of making a new floor
          * Options:
@@ -114,7 +134,7 @@ public class EncounterManager
             2. This function already knows which enemy is picked. Simply use the information from the enemy to generate a new combat fight (with enemy difficulty)
         */
 
-        _activeEnemyPool[id].PickSelection(); //confirm selection of this enemy (currently empty)
+        _activeEnemyPool[_actionIndex].PickSelection(); //confirm selection of this enemy (currently empty)
 
         //The floor number and new floor generation can be called later when the combat is over.
         CreateNextFloor();

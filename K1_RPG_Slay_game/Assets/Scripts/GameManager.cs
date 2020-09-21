@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -97,10 +98,12 @@ public class GameManager : MonoBehaviour
 		}
 		if (_currentScene.buildIndex == 1)
 		{
+			//instantiate a new encountermanager script which handles the map logic
 			_em = new EncounterManager();
-			_im.SetEm();
-			_em.SpawnPlayer();
-			_em.CreateNextFloor();
+
+			_im.OnLeftButtonPressed += _em.SelectedEncounterLeft;
+			_im.OnRightButtonPressed += _em.SelectedEncounterRight;
+			_im.OnSelectButtonPressed += _em.Use;
 		}
 	}
 
@@ -112,7 +115,7 @@ public class GameManager : MonoBehaviour
             StartCoroutine(SceneSwitchAsync(sceneToLoad));
         }
 
-		_im.UpdateInputs(_currentScene.buildIndex);
+		_im.UpdateInputs();
 	}
 
     //This function should be called to switch a Scene
@@ -146,6 +149,7 @@ public class GameManager : MonoBehaviour
 		{
 			case 0: //go to map
 				SceneManager.LoadScene(_currentScene.buildIndex + 1);
+				_selectButton = null;
 				break;
 			case 1: //go to battle
 				SceneManager.LoadScene(_currentScene.buildIndex + 1);
@@ -160,6 +164,8 @@ public class GameManager : MonoBehaviour
 			default:
 				break;
 		}
+
+		GC.Collect();
 	}
 
 	//This method instantiates a player with the right stats for his class at the start of the game
