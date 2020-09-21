@@ -19,7 +19,6 @@ public class CombatDisplay
     // player health bar
     public CombatDisplay(GameObject textDistance, GameObject textMovepoints, GameObject textPlayerHp, GameObject textEnemyHp, GameObject canvas)
     {
-      
         _texts = new Dictionary<int, DisplayText>();
 
         _canvas = Object.Instantiate(canvas, canvas.transform.position, Quaternion.identity);
@@ -27,12 +26,13 @@ public class CombatDisplay
         createText(1, textMovepoints, _canvas , -0.1f, 3.57f);
         createText(2, textPlayerHp, _canvas , -1.82f , -2.2f);
         createText(3, textEnemyHp, _canvas , 7.01f, 1.45f);
-     
     }
-    public void createText(int index , GameObject gameObject,GameObject parent , float xpos,float ypos)
+
+    public void createText(int index , GameObject gameObject, GameObject parent , float xpos, float ypos)
     {
-        _texts[index] = new DisplayText(gameObject , parent , xpos, ypos);
-        switch(index){
+        _texts[index] = new DisplayText(gameObject, parent, xpos, ypos);
+        switch(index)
+		{
             case 0:
                 _textDistance = _texts[index]._objectText;
                 break;
@@ -47,6 +47,7 @@ public class CombatDisplay
                 break;
         }
     }
+
     public void UpdateMoving(int dis, int mp)
     {
         _textDistance.text = "D: " + dis.ToString();
@@ -90,4 +91,3 @@ public class CombatDisplay
 //        // quick test
 //    }
 //}
-

@@ -112,20 +112,18 @@ public class GameManager : MonoBehaviour
 		else if (_currentScene.buildIndex == 2)
 		{
 			// just for playability
-			_player = new Player(5, 1, 1, PlayerClass.VITOP, SWORD, LEATHER_ARMOR); 
 			_currentEnemy = new Enemy(2,2,2,2);
 
 			_selectButton = new SelectButton(Resources.Load<Sprite>("Sprites/PlayerSelect"),
 			Resources.Load<Sprite>("Sprites/PlayerDeselect"),
 			Resources.Load<GameObject>("Prefabs/Button"), true);
 			
-			
 			_combatDisplay = new CombatDisplay(Resources.Load<GameObject>("Prefabs/dis"),
 			Resources.Load<GameObject>("Prefabs/moveP"),
 			Resources.Load<GameObject>("Prefabs/Php"),
 			Resources.Load<GameObject>("Prefabs/EEhp"), 
 			Resources.Load<GameObject>("Prefabs/Canvas"));
-			_combatHandler = new CombatHandler(1, false, 1, 9, _player as IPlayer, true, _currentEnemy as IEnemy,_combatDisplay);
+			_combatHandler = new CombatHandler(1, false, 1, 9, _player as IPlayer, true, _currentEnemy as IEnemy, _combatDisplay);
 			_im.OnLeftButtonPressed += _selectButton.SelectedActionLeft;
 			_im.OnRightButtonPressed += _selectButton.SelectedActionRight;
 			_im.OnSelectButtonPressed += _selectButton.Use;

@@ -110,6 +110,7 @@ public class EncounterManager
         _actionIndex = Mathf.Min(_actionIndex + 1, _allActions.Count - 1);
         _activeEnemyPool[_actionIndex].OnSelect();
     }
+
     public void SelectedEncounterLeft()
     { //select the left encounter and also update the visuals
         _activeEnemyPool[_actionIndex].OnDeselect();
