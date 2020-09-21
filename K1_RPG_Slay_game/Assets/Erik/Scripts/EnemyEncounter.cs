@@ -17,8 +17,8 @@ public class EnemyEncounter : IMapEncounter, ISpawnable
     protected GameObject _enemyMapObject;
 
     protected SpriteRenderer _enemySR;
-    protected Sprite selectedImage;
-    protected Sprite deselectedImage;
+    protected Sprite _selectedImage;
+    protected Sprite _deselectedImage;
 
     public virtual Vector2 GetPosition()
     {
@@ -38,12 +38,12 @@ public class EnemyEncounter : IMapEncounter, ISpawnable
 
     public virtual void OnSelect()
     {
-        _enemySR.sprite = selectedImage;
+        _enemySR.sprite = _selectedImage;
     }
 
     public virtual void OnDeselect()
     {
-        _enemySR.sprite = deselectedImage;
+        _enemySR.sprite = _deselectedImage;
     }
 
     public virtual void PickSelection()
@@ -58,8 +58,8 @@ public class EnemyEncounter : IMapEncounter, ISpawnable
         {
             _enemyMapObject = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/LightEnemyPrefab"));
             _enemySR = _enemyMapObject.GetComponent<SpriteRenderer>();
-            selectedImage = Resources.Load<Sprite>("Sprites/lightEnemy");
-            deselectedImage = Resources.Load<Sprite>("Sprites/lightEnemyDeselected");
+            _selectedImage = Resources.Load<Sprite>("Sprites/lightEnemy");
+            _deselectedImage = Resources.Load<Sprite>("Sprites/lightEnemyDeselected");
 
             DisableGameobject();
         }
@@ -67,8 +67,8 @@ public class EnemyEncounter : IMapEncounter, ISpawnable
         {
             _enemyMapObject = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/HeavyEnemyPrefab"));
             _enemySR = _enemyMapObject.GetComponent<SpriteRenderer>();
-            selectedImage = Resources.Load<Sprite>("Sprites/heavyEnemy");
-            deselectedImage = Resources.Load<Sprite>("Sprites/heavyEnemyDeselected");
+            _selectedImage = Resources.Load<Sprite>("Sprites/heavyEnemy");
+            _deselectedImage = Resources.Load<Sprite>("Sprites/heavyEnemyDeselected");
 
             DisableGameobject();
         }
