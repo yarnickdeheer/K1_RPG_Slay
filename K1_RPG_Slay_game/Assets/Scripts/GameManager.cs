@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public enum PlayerClass
@@ -14,13 +16,17 @@ public class GameManager : MonoBehaviour
 	//Singleton pattern
 	private static GameManager INSTANCE;
 	public static GameManager Instance
-		{
-			get { return INSTANCE; }
-		}
+	{
+		get { return INSTANCE; }
+	}
 
 	//Definitions for other Managers
 	public EncounterManager _em;
 	public InputManager _im;
+
+	//defining a SelectButton for the input
+	public SelectButton _selectButton;
+	public CombatHandler _combatHandler;
 
 	//Weapon Constructor to instantiate all weapons: weight, baseDamage, strScaling, dexScaling
 	//DISCUSS: Another option is making a base class Weapon and adding an enum/type of for example rapier
@@ -53,11 +59,13 @@ public class GameManager : MonoBehaviour
 	public ICombatant _player;
 	public ICombatant _currentEnemy;
 
-	//maxOptions for the input manager, at the start when you choose a class you have 3 options
-	private int _maxOptions = 3;
-	
+	private Scene _currentScene;
+	private int _currentSceneID;
+
 	private void Awake()
-    {
+	{
+		Debug.Log("Initiating GameManager");
+
 		//Singleton pattern
 		if (INSTANCE != null && INSTANCE != this)
 		{
@@ -71,67 +79,104 @@ public class GameManager : MonoBehaviour
 		//(example) Enemy constructor: vit, str, dex, weight
 		//ICombatant enemy1 = new Enemy(2, 2, 2, 30);
 
-		//Instantiate the managers
-		_em = new EncounterManager();
+		//Instantiate objects
 		_im = new InputManager();
 
-		//Manager awake functionality
-		_im.AddEm();
-		//TODO: this functionality needs to be executed whenever the player is placed in scene, not at startup
-		_em.SpawnPlayer();
-		_em.CreateNextFloor();
+		//Check the current scene
+		_currentScene = SceneManager.GetActiveScene();
+		_currentSceneID = _currentScene.buildIndex;
+
+		//This happens here because it's the best way to detect if it's the start of the game, and this needs to happen then
+		if (_currentScene.buildIndex == 0)
+		{
+			_selectButton = new SelectButton(Resources.Load<Sprite>("Sprites/PlayerSelect"),
+				Resources.Load<Sprite>("Sprites/PlayerDeselect"),
+				Resources.Load<GameObject>("Prefabs/Button"),false);
+
+			_im.OnLeftButtonPressed += _selectButton.SelectedActionLeft;
+			_im.OnRightButtonPressed += _selectButton.SelectedActionRight;
+			_im.OnSelectButtonPressed += _selectButton.Use;
+		}
+		if (_currentScene.buildIndex == 1)
+		{
+			//instantiate a new encountermanager script which handles the map logic
+			_em = new EncounterManager();
+
+			_im.OnLeftButtonPressed += _em.SelectedEncounterLeft;
+			_im.OnRightButtonPressed += _em.SelectedEncounterRight;
+			_im.OnSelectButtonPressed += _em.Use;
+		}
+		else if (_currentScene.buildIndex == 2)
+		{
+			_selectButton = new SelectButton(Resources.Load<Sprite>("Sprites/PlayerSelect"),
+			Resources.Load<Sprite>("Sprites/PlayerDeselect"),
+			Resources.Load<GameObject>("Prefabs/Button"), true);
+			_combatHandler = new CombatHandler(1,false,1,9);
+			_im.OnLeftButtonPressed += _selectButton.SelectedActionLeft;
+			_im.OnRightButtonPressed += _selectButton.SelectedActionRight;
+			_im.OnSelectButtonPressed += _selectButton.Use;
+		}
 	}
 
     private void Update()
     {
-		_im.UpdateInputs(_maxOptions);
+		if (Input.GetKeyDown(KeyCode.T))
+        {
+			int sceneToLoad = _currentSceneID + 1;
+            StartCoroutine(SceneSwitchAsync(sceneToLoad));
+        }
+
+		_im.UpdateInputs();
 	}
 
+    //This function should be called to switch a Scene
+    private IEnumerator SceneSwitchAsync(int sceneID)
+    {
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneID);
+
+        // Wait until the asynchronous scene fully loads
+        while (!asyncLoad.isDone)
+        {
+            if (asyncLoad.progress >= 0.9f)
+            {
+                asyncLoad.allowSceneActivation = true;
+            }
+            else
+            {
+                asyncLoad.allowSceneActivation = false;
+            }
+
+            yield return null;
+        }
+    }
+    
 	//This function should be called to switch a Scene
-	//TODO: find a better way to detect when to execute certain code
 	public void SceneSwitch()
 	{
-		Scene scene = SceneManager.GetActiveScene();
+		Scene _currentScene = SceneManager.GetActiveScene();
 		
-		//temporary
-		SceneManager.LoadScene(scene.buildIndex + 1);
-
-		/*
-		switch (scene.buildIndex)
+		//this part of the script knows what scene to switch to
+		switch (_currentScene.buildIndex)
 		{
-			case 0:
-				SceneManager.LoadScene(scene.buildIndex + 1);
+			case 0: //go to map
+				SceneManager.LoadScene(_currentScene.buildIndex + 1);
+				_selectButton = null;
 				break;
-			case 1:
-				SceneManager.LoadScene(scene.buildIndex + 1);
+			case 1: //go to battle
+				SceneManager.LoadScene(_currentScene.buildIndex + 1);
+				_em = null;
 				break;
-			case 2:
-				if (item)
-					//go to item switch
-					SceneManager.LoadScene(scene.buildIndex + 1);
-				else
-					//back to map
-					SceneManager.LoadScene(scene.buildIndex - 1);
+			case 2: //go to end screen
+				SceneManager.LoadScene(_currentScene.buildIndex + 1);
 				break;
-			case 3:
-				if (level up)
-					//go to level up
-					SceneManager.LoadScene(scene.buildIndex + 1);
-				else
-					//back to map
-					SceneManager.LoadScene(scene.buildIndex - 2);
+			case 3: //back to map
+				SceneManager.LoadScene(_currentScene.buildIndex - 2);
 				break;
-			case 4:
-				//back to map
-				SceneManager.LoadScene(scene.buildIndex - 3);
+			default:
 				break;
 		}
-		*/
 
-		if (scene.buildIndex == 1)
-		{
-			_maxOptions = 2;
-		}
+		GC.Collect();
 	}
 
 	//This method instantiates a player with the right stats for his class at the start of the game
@@ -151,6 +196,17 @@ public class GameManager : MonoBehaviour
 			default:
 				Debug.Log("Invalid player class was chosen");
 				break;
+		}
+	}
+	public void BattleUIInstantiate()
+	{
+		_im = new InputManager();
+		if (_currentScene.buildIndex == 2)
+		{
+			_selectButton._battle = true;
+			_im.OnLeftButtonPressed += _selectButton.SelectedActionLeft;
+			_im.OnRightButtonPressed += _selectButton.SelectedActionRight;
+			_im.OnSelectButtonPressed += _selectButton.Use;
 		}
 	}
 }
