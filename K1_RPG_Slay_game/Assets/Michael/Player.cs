@@ -47,11 +47,6 @@ public class Player : IPlayer
 		PlayerClass = playerClass;
 	}
 
-	public void TakeDamage()
-	{
-
-	}
-
 	public void GetXp(int xp)
 	{
 		//add the gained xp to the totalxp

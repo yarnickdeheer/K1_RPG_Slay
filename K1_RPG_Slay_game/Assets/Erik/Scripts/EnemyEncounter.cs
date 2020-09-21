@@ -48,7 +48,7 @@ public class EnemyEncounter : IMapEncounter, ISpawnable
 
     public virtual void PickSelection()
     {
-        //TODO: Confirmation Selection of encounter
+        GameManager.Instance.SceneSwitch();
     }
     
     //DISCUSS: Does this function need to be moved to the more specific inherit class? Does it need an abstract void?
