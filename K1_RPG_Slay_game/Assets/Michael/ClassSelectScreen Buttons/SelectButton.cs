@@ -10,6 +10,7 @@ public class SelectButton
 
 	private List<System.Action> _battleActions;
 	private Dictionary<int, ClassSelectButton> _buttons;
+	
 
 	public Sprite _buttonSelected;
 	public Sprite _buttonDeselected;
@@ -46,6 +47,7 @@ public class SelectButton
 		_battleActions.Add(MoveForward);
 		_battleActions.Add(MoveBack);
 
+
 		//make 3 new buttons
 		CreateButton(0, -10.3f, -5f);
 		CreateButton(1, -.3f, -5f);
@@ -75,12 +77,14 @@ public class SelectButton
 
 	public void Use()
 	{ //invoke the current action
-		if (_battle == true)
+		if (_battle == true )
 		{
+
 			_battleActions[_actionIndex].Invoke();
 		} 
 		else
 		{
+
 			_allActions[_actionIndex].Invoke();
 		}
 		
@@ -112,7 +116,7 @@ public class SelectButton
 	{
 		gm._combatHandler._choice = 1;
 		gm._combatHandler.GetInput(1);
-		DestroyButtons();
+		//DestroyButtons();
 
 	}
 
@@ -120,31 +124,25 @@ public class SelectButton
 	{
 		gm._combatHandler._choice = 2;
 		gm._combatHandler.GetInput(2);
-		DestroyButtons();
+		//DestroyButtons();
 	}
 
 	private void MoveBack()
 	{
 		gm._combatHandler._choice = 3;
 		gm._combatHandler.GetInput(3);
-		DestroyButtons();
+		//DestroyButtons();
 	}
 
 	//these methods handle the visual aspect of the buttons
 	private void OnSelect()
 	{
-		if (_buttons[_actionIndex]._buttonSR != null)
-		{
-			_buttons[_actionIndex]._buttonSR.sprite = _buttonSelected;
-		}
+		_buttons[_actionIndex]._buttonSR.sprite = _buttonSelected;
 	}
 
 	private void OnDeselect()
 	{
-		if (_buttons[_actionIndex]._buttonSR != null)
-		{
-			_buttons[_actionIndex]._buttonSR.sprite = _buttonDeselected;
-		}
+		_buttons[_actionIndex]._buttonSR.sprite = _buttonDeselected;
 	}
 
 	private void DestroyButtons()
