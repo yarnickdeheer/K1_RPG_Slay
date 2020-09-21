@@ -136,6 +136,10 @@ public class GameManager : MonoBehaviour
 			_im.OnRightButtonPressed += _selectButton.SelectedActionRight;
 			_im.OnSelectButtonPressed += _selectButton.Use;
 		}
+		if (_currentScene.buildIndex == 3)
+		{
+			_sm.LoadScene3();
+		}
 	}
 
     private void Update()

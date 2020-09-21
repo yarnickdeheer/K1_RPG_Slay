@@ -13,28 +13,28 @@ public class ScenesManager
 
 	public void SceneSwitch()
 	{
-		Scene _currentScene = SceneManager.GetActiveScene();
+		Scene currentScene = SceneManager.GetActiveScene();
 
 		//this part of the script knows what scene to switch to
-		switch (_currentScene.buildIndex)
+		switch (currentScene.buildIndex)
 		{
 			case 0: //go to map
 				LoadScene1();
 				_gm._selectButton = null;
-				SceneManager.LoadScene(_currentScene.buildIndex + 1);
+				SceneManager.LoadScene(currentScene.buildIndex + 1);
 				break;
 			case 1: //go to battle
 				LoadScene2();
 				_gm._em = null;
-				SceneManager.LoadScene(_currentScene.buildIndex + 1);
+				SceneManager.LoadScene(currentScene.buildIndex + 1);
 				break;
 			case 2: //go to end screen
 				LoadScene3();
-				SceneManager.LoadScene(_currentScene.buildIndex + 1);
+				SceneManager.LoadScene(currentScene.buildIndex + 1);
 				break;
 			case 3: //back to map
 				LoadScene1();
-				SceneManager.LoadScene(_currentScene.buildIndex - 2);
+				SceneManager.LoadScene(currentScene.buildIndex - 2);
 				break;
 			default:
 				break;

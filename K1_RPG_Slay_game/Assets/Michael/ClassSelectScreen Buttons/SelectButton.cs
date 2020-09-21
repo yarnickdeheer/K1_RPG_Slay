@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-using UnityEngine.UI;
 
 public class SelectButton
 {
@@ -45,8 +44,9 @@ public class SelectButton
 		_allActions.Add(UseStronkButton);
 		_allActions.Add(UseDexeusButton);
 		_battleActions.Add(Attack);
-		_battleActions.Add(Moveforward);
-		_battleActions.Add(Moveback);
+		_battleActions.Add(MoveForward);
+		_battleActions.Add(MoveBack);
+
 
 		//make 3 new buttons
 		CreateButton(0, -10.3f, -5f);
@@ -111,6 +111,7 @@ public class SelectButton
 		DestroyButtons();
 		gm.SceneSwitch();
 	}
+
 	private void Attack()
 	{
 		gm._combatHandler._choice = 1;
@@ -118,13 +119,15 @@ public class SelectButton
 		//DestroyButtons();
 
 	}
-	private void Moveforward()
+
+	private void MoveForward()
 	{
 		gm._combatHandler._choice = 2;
 		gm._combatHandler.GetInput(2);
 		//DestroyButtons();
 	}
-	private void Moveback()
+
+	private void MoveBack()
 	{
 		gm._combatHandler._choice = 3;
 		gm._combatHandler.GetInput(3);

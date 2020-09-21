@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class RewardChoice : IColletable
@@ -18,7 +17,6 @@ public class RewardChoice : IColletable
         Player = player;
     }
 
-
     public void CollectItem()
     {
         // get choice id   
@@ -29,7 +27,6 @@ public class RewardChoice : IColletable
             Player.Weapon = Weapon;
             // ga terug naar encouter/map
         }
-
 
         // collect the item if the player chooses so 
         // drop current gear in that possition if it has something in that position
