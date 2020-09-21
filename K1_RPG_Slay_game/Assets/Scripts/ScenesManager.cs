@@ -67,11 +67,19 @@ public class ScenesManager
 
 	public void LoadScene2()
 	{
-		_gm._selectButton = new SelectButton(Resources.Load<Sprite>("Sprites/PlayerSelect"),
-			Resources.Load<Sprite>("Sprites/PlayerDeselect"),
-			Resources.Load<GameObject>("Prefabs/Button"), true);
-		_gm._combatHandler = new CombatHandler(1, false, 1, 9);
+		_gm._currentEnemy = new Enemy(2, 2, 2, 2);
 
+		_gm._selectButton = new SelectButton(Resources.Load<Sprite>("Sprites/PlayerSelect"),
+		Resources.Load<Sprite>("Sprites/PlayerDeselect"),
+		Resources.Load<GameObject>("Prefabs/Button"), true);
+
+
+		_gm._combatDisplay = new CombatDisplay(Resources.Load<GameObject>("Prefabs/dis"),
+		Resources.Load<GameObject>("Prefabs/moveP"),
+		Resources.Load<GameObject>("Prefabs/Php"),
+		Resources.Load<GameObject>("Prefabs/EEhp"),
+		Resources.Load<GameObject>("Prefabs/Canvas"));
+		_gm._combatHandler = new CombatHandler(1, false, 1, 9, _gm._player as IPlayer, true, _gm._currentEnemy as IEnemy, _gm._combatDisplay);
 		_gm._im.OnLeftButtonPressed += _gm._selectButton.SelectedActionLeft;
 		_gm._im.OnRightButtonPressed += _gm._selectButton.SelectedActionRight;
 		_gm._im.OnSelectButtonPressed += _gm._selectButton.Use;

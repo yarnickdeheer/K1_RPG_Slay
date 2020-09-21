@@ -18,9 +18,7 @@ public class CombatHandler : ICombatHandler
     private int _distance;
     private int _moveSpeed;// set this value when start the battle
 
-    //public enemy _currentEnemy;
-
-    public CombatHandler( int choice , bool attacked , int playerpos,int enemypos, IPlayer player , bool playerturn, IEnemy enemy,CombatDisplay display)
+    public CombatHandler( int choice , bool attacked , int playerpos,int enemypos, IPlayer player , bool playerturn, IEnemy enemy, CombatDisplay display)
     {
         _choice = choice;
         _attacked = attacked;

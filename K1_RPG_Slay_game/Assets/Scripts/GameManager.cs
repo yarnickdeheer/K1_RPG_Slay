@@ -25,9 +25,6 @@ public class GameManager : MonoBehaviour
 	public EncounterManager _em;
 	public InputManager _im;
 
-	
-
-
 	//defining a SelectButton for the input
 	public SelectButton _selectButton;
 	public CombatHandler _combatHandler;
@@ -79,7 +76,7 @@ public class GameManager : MonoBehaviour
 		}
 		else
 		{
-			//DontDestroyOnLoad(this);
+			DontDestroyOnLoad(this);
 			INSTANCE = this;
 		}
 
@@ -115,9 +112,7 @@ public class GameManager : MonoBehaviour
 		}
 		else if (_currentScene.buildIndex == 2)
 		{
-
 			// just for playability
-
 			_player = new Player(5, 1, 1, PlayerClass.VITOP, SWORD, LEATHER_ARMOR); 
 			_currentEnemy = new Enemy(2,2,2,2);
 
@@ -138,7 +133,7 @@ public class GameManager : MonoBehaviour
 		}
 		if (_currentScene.buildIndex == 3)
 		{
-			_sm.LoadScene3();
+			
 		}
 	}
 
