@@ -1,4 +1,4 @@
-﻿public interface ICombatant : IDamageable
+﻿public interface ICombatant
 {
 	//the level of the combatant
 	int Level { get; set; }

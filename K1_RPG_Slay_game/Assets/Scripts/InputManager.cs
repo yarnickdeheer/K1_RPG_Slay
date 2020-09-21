@@ -8,7 +8,6 @@ public class InputManager
 	public event System.Action OnSelectButtonPressed;
 
 	//Checks the inputs and calls methods based upon the inputs. For now, depending on the scene the script has different functionality.
-	//TODO: Make encountermap(_em) input like startscreen input, if you need reference check SelectButton and ClassSelectButton.
 	public void UpdateInputs()
 	{
 		if (Input.GetKeyDown(KeyCode.LeftArrow))
