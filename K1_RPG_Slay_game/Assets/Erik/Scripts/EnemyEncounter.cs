@@ -36,14 +36,18 @@ public class EnemyEncounter : IMapEncounter, ISpawnable
 
     public virtual void OnSelect()
     {
-        _enemySR.sprite = _selectedImage;
+		if (_enemySR != null)
+		{
+			_enemySR.sprite = _selectedImage;
+		}
     }
 
     public virtual void OnDeselect()
     {
-        Debug.Log(_enemyMapObject);
-        Debug.Log(_enemySR);
-        _enemySR.sprite = _deselectedImage;
+		if (_enemySR != null)
+		{
+			_enemySR.sprite = _deselectedImage;
+		}
     }
 
     public virtual void PickSelection()
