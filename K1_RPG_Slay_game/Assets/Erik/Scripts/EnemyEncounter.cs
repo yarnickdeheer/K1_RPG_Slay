@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 //DISCUSS: If the OnEnemyCreate void will become an abstract void, will this still be needed?
 public enum EnemyType
@@ -43,6 +41,8 @@ public class EnemyEncounter : IMapEncounter, ISpawnable
 
     public virtual void OnDeselect()
     {
+        Debug.Log(_enemyMapObject);
+        Debug.Log(_enemySR);
         _enemySR.sprite = _deselectedImage;
     }
 
@@ -56,7 +56,7 @@ public class EnemyEncounter : IMapEncounter, ISpawnable
     {
         if(enemyType == EnemyType.LIGHT_ENEMY)
         {
-            _enemyMapObject = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/LightEnemyPrefab"));
+            _enemyMapObject = Object.Instantiate(Resources.Load<GameObject>("Prefabs/LightEnemyPrefab"));
             _enemySR = _enemyMapObject.GetComponent<SpriteRenderer>();
             _selectedImage = Resources.Load<Sprite>("Sprites/lightEnemy");
             _deselectedImage = Resources.Load<Sprite>("Sprites/lightEnemyDeselected");
@@ -65,7 +65,7 @@ public class EnemyEncounter : IMapEncounter, ISpawnable
         }
         else if (enemyType == EnemyType.HEAVY_ENEMY)
         {
-            _enemyMapObject = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/HeavyEnemyPrefab"));
+            _enemyMapObject = Object.Instantiate(Resources.Load<GameObject>("Prefabs/HeavyEnemyPrefab"));
             _enemySR = _enemyMapObject.GetComponent<SpriteRenderer>();
             _selectedImage = Resources.Load<Sprite>("Sprites/heavyEnemy");
             _deselectedImage = Resources.Load<Sprite>("Sprites/heavyEnemyDeselected");

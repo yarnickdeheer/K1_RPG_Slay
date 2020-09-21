@@ -60,7 +60,6 @@ public class GameManager : MonoBehaviour
 	public ICombatant _currentEnemy;
 
 	private Scene _currentScene;
-	private int _currentSceneID;
 
 	private void Awake()
 	{
@@ -86,7 +85,6 @@ public class GameManager : MonoBehaviour
 
 		//Check the current scene
 		_currentScene = SceneManager.GetActiveScene();
-		_currentSceneID = _currentScene.buildIndex;
 
 		//This happens here because it's the best way to detect if it's the start of the game, and this needs to happen then
 		if (_currentScene.buildIndex == 0)
@@ -105,36 +103,9 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-		if (Input.GetKeyDown(KeyCode.T))
-        {
-			int sceneToLoad = _currentSceneID + 1;
-            StartCoroutine(SceneSwitchAsync(sceneToLoad));
-        }
-
 		_im.UpdateInputs();
 	}
 
-    //This function should be called to switch a Scene
-    private IEnumerator SceneSwitchAsync(int sceneID)
-    {
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneID);
-
-        // Wait until the asynchronous scene fully loads
-        while (!asyncLoad.isDone)
-        {
-            if (asyncLoad.progress >= 0.9f)
-            {
-                asyncLoad.allowSceneActivation = true;
-            }
-            else
-            {
-                asyncLoad.allowSceneActivation = false;
-            }
-
-            yield return null;
-        }
-    }
-    
 	//This function should be called to switch a Scene
 	public void SceneSwitch()
 	{
@@ -158,17 +129,6 @@ public class GameManager : MonoBehaviour
 			default:
 				Debug.Log("Invalid player class was chosen");
 				break;
-		}
-	}
-	public void BattleUIInstantiate()
-	{
-		_im = new InputManager();
-		if (_currentScene.buildIndex == 2)
-		{
-			_selectButton._battle = true;
-			_im.OnLeftButtonPressed += _selectButton.SelectedActionLeft;
-			_im.OnRightButtonPressed += _selectButton.SelectedActionRight;
-			_im.OnSelectButtonPressed += _selectButton.Use;
 		}
 	}
 }

@@ -47,7 +47,7 @@ public class CombatHandler : ICombatHandler
         if (_attacked == true && Choice == 1)
         {
             //ga terug naar input scherm
-            _gameManager.BattleUIInstantiate();
+            //_gameManager.BattleUIInstantiate();
         }
         if (_moveSpeed <= 0)
         {
@@ -55,7 +55,7 @@ public class CombatHandler : ICombatHandler
             {
                 Debug.Log("cant walk anuymore");
 
-                _gameManager.BattleUIInstantiate();
+                //_gameManager.BattleUIInstantiate();
             }
             else
             {
@@ -82,7 +82,7 @@ public class CombatHandler : ICombatHandler
             {
                 // go to input
 
-                _gameManager.BattleUIInstantiate();
+                //_gameManager.BattleUIInstantiate();
             }
             else
             {
@@ -130,7 +130,7 @@ public class CombatHandler : ICombatHandler
                 // retake choice
                 // ga terug naar input scherm
 
-                _gameManager.BattleUIInstantiate();
+                //_gameManager.BattleUIInstantiate();
             }
         }
         else if (Choice == 2)
@@ -142,7 +142,7 @@ public class CombatHandler : ICombatHandler
                 _combatDisplay.UpdateMoving(Dis,_moveSpeed);
                 // ga terug naar input scherm
 
-                _gameManager.BattleUIInstantiate();
+                //_gameManager.BattleUIInstantiate();
                 EndTurn();
             }
             else
@@ -150,7 +150,7 @@ public class CombatHandler : ICombatHandler
                 Debug.Log("fighter1 staat voor de fighter2");
                 // ga terug naar input scherm
 
-                _gameManager.BattleUIInstantiate();
+                //_gameManager.BattleUIInstantiate();
                 EndTurn();
             }
         }
@@ -163,7 +163,7 @@ public class CombatHandler : ICombatHandler
                 _combatDisplay.UpdateMoving(Dis, _moveSpeed);
                 // ga terug naar input scherm
 
-                _gameManager.BattleUIInstantiate();
+                //_gameManager.BattleUIInstantiate();
                 EndTurn();
             }
             else
@@ -172,7 +172,7 @@ public class CombatHandler : ICombatHandler
 
                 // ga terug naar input scherm
 
-                _gameManager.BattleUIInstantiate();
+                //_gameManager.BattleUIInstantiate();
                 EndTurn();
             }
 
@@ -199,7 +199,7 @@ public class CombatHandler : ICombatHandler
             {
                 // go back to input
 
-                _gameManager.BattleUIInstantiate();
+                //_gameManager.BattleUIInstantiate();
                 EndTurn();
             }
         }
@@ -215,7 +215,7 @@ public class CombatHandler : ICombatHandler
             {
                 // go back to input
 
-                _gameManager.BattleUIInstantiate();
+                //_gameManager.BattleUIInstantiate();
                 EndTurn();
             }
         }

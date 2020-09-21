@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 
 public class SelectButton
 {
@@ -77,12 +78,10 @@ public class SelectButton
 	{ //invoke the current action
 		if (_battle == true)
 		{
-
 			_battleActions[_actionIndex].Invoke();
 		} 
 		else
 		{
-
 			_allActions[_actionIndex].Invoke();
 		}
 		
@@ -132,12 +131,18 @@ public class SelectButton
 	//these methods handle the visual aspect of the buttons
 	private void OnSelect()
 	{
-		_buttons[_actionIndex]._buttonSR.sprite = _buttonSelected;
+		if (_buttons[_actionIndex]._buttonSR != null)
+		{
+			_buttons[_actionIndex]._buttonSR.sprite = _buttonSelected;
+		}
 	}
 
 	private void OnDeselect()
 	{
-		_buttons[_actionIndex]._buttonSR.sprite = _buttonDeselected;
+		if (_buttons[_actionIndex]._buttonSR != null)
+		{
+			_buttons[_actionIndex]._buttonSR.sprite = _buttonDeselected;
+		}
 	}
 
 	private void DestroyButtons()

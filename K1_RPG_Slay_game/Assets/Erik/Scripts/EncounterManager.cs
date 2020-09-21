@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class EncounterManager
@@ -85,7 +83,7 @@ public class EncounterManager
 
     private void CreateKilledEnemy(Vector2 position)
     {
-        GameObject _killedMapObject = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/KilledEnemyPrefab"));
+        GameObject _killedMapObject = Object.Instantiate(Resources.Load<GameObject>("Prefabs/KilledEnemyPrefab"));
         _killedMapObject.transform.position = position;
     }
 
