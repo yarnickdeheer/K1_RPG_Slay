@@ -29,6 +29,7 @@ public class HeavyEnemyEncounter : EnemyEncounter, IMapEncounter, ISpawnable
 
     public override void PickSelection()
     {
+        GameManager.Instance._currentEnemy = new Enemy(2, 4, 1, 45);
         base.PickSelection();
     }
 

@@ -6,9 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/StartScreen.unity
-    guid: 66ff8f9137337c848bcc0e4af584b39b
+    path: Assets/Scenes/ClassSelectScreen.unity
+    guid: 0ec40048f9acb054c84722f40f4ae70b
   - enabled: 1
     path: Assets/Scenes/EncounterMap.unity
     guid: 3919630b615b06644a6bb228c08af693
+  - enabled: 1
+    path: Assets/Yarnick/scenes/YtestScene.unity
+    guid: f06289114dbe3be41aa76ddc6745c3f8
   m_configObjects: {}

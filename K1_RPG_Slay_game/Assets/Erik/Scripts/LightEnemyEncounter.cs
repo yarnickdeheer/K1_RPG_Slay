@@ -29,6 +29,7 @@ public class LightEnemyEncounter : EnemyEncounter, IMapEncounter, ISpawnable
 
     public override void PickSelection()
     {
+        GameManager.Instance._currentEnemy = new Enemy(1, 1, 5, 12);
         base.PickSelection();
     }
 
