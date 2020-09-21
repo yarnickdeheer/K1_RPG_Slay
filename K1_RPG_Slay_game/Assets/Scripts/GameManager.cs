@@ -99,6 +99,10 @@ public class GameManager : MonoBehaviour
 		{
 			_sm.LoadScene2();
 		}
+		if (_currentScene.buildIndex == 3)
+		{
+			_sm.LoadScene3();
+		}
 	}
 
     private void Update()
