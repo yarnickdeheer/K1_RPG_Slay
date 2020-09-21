@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestingMonobehavior : MonoBehaviour
+public class TestingMonobehavior
 {
-    //DISCUSS: How will we handle the input? (This MonoBehaviour is temporary for testing)
-    EncounterManager enc; 
+    //How will we handle the input? (This MonoBehaviour is temporary for testing)
+    /*EncounterManager enc; 
 
     private int _selection = 3;
 
@@ -38,5 +38,5 @@ public class TestingMonobehavior : MonoBehaviour
             enc.ConfirmSelection(_selection);
             _selection = 3;
         }
-    }
+    }*/
 }
