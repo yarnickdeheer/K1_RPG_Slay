@@ -11,7 +11,7 @@ public class InputManager
     private EncounterManager _em;
     private int _selection = 3;
 
-    public InputManager()
+    public void SetEm()
 	{
         _em = GameManager.Instance._em;
     }
@@ -39,11 +39,13 @@ public class InputManager
 		{
 			if (Input.GetKeyDown(KeyCode.LeftArrow))
 			{
+				_selection = 0;
 				_em.SelectEncounter(_selection);
 				_em.DeselectEncounter(1);
 			}
 			if (Input.GetKeyDown(KeyCode.RightArrow))
 			{
+				_selection = 1;
 				_em.SelectEncounter(_selection);
 				_em.DeselectEncounter(0);
 			}

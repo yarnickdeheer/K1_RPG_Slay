@@ -98,6 +98,7 @@ public class GameManager : MonoBehaviour
 		if (_currentScene.buildIndex == 1)
 		{
 			_em = new EncounterManager();
+			_im.SetEm();
 			_em.SpawnPlayer();
 			_em.CreateNextFloor();
 		}
