@@ -21,26 +21,28 @@ public class ScenesManager
 			case 0: //go to map
 				LoadScene1();
 				_gm._selectButton = null;
+				GC.Collect();
 				SceneManager.LoadScene(currentScene.buildIndex + 1);
 				break;
 			case 1: //go to battle
 				LoadScene2();
 				_gm._em = null;
+				GC.Collect();
 				SceneManager.LoadScene(currentScene.buildIndex + 1);
 				break;
 			case 2: //go to end screen
 				LoadScene3();
+				GC.Collect();
 				SceneManager.LoadScene(currentScene.buildIndex + 1);
 				break;
 			case 3: //back to map
 				LoadScene1();
+				GC.Collect();
 				SceneManager.LoadScene(currentScene.buildIndex - 2);
 				break;
 			default:
 				break;
 		}
-
-		GC.Collect();
 	}
 
 	public void LoadScene0()
@@ -72,7 +74,6 @@ public class ScenesManager
 		_gm._selectButton = new SelectButton(Resources.Load<Sprite>("Sprites/PlayerSelect"),
 		Resources.Load<Sprite>("Sprites/PlayerDeselect"),
 		Resources.Load<GameObject>("Prefabs/Button"), true);
-
 
 		_gm._combatDisplay = new CombatDisplay(Resources.Load<GameObject>("Prefabs/dis"),
 		Resources.Load<GameObject>("Prefabs/moveP"),

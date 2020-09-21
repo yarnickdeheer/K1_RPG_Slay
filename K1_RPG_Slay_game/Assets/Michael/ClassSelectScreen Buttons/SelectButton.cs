@@ -43,6 +43,8 @@ public class SelectButton
 		_allActions.Add(UseVitopButton);
 		_allActions.Add(UseStronkButton);
 		_allActions.Add(UseDexeusButton);
+
+		//add the battle actions
 		_battleActions.Add(Attack);
 		_battleActions.Add(MoveForward);
 		_battleActions.Add(MoveBack);
@@ -76,7 +78,7 @@ public class SelectButton
 
 	public void Use()
 	{ //invoke the current action
-		if (_battle == true )
+		if (_battle == true)
 		{
 			_battleActions[_actionIndex].Invoke();
 		} 
