@@ -100,6 +100,7 @@ public class GameManager : MonoBehaviour
 			_im.OnRightButtonPressed += _selectButton.SelectedActionRight;
 			_im.OnSelectButtonPressed += _selectButton.Use;
 		}
+		/*
 		if (_currentScene.buildIndex == 1)
 		{
 			//instantiate a new encountermanager script which handles the map logic
@@ -123,6 +124,7 @@ public class GameManager : MonoBehaviour
 			Resources.Load<GameObject>("Prefabs/Php"),
 			Resources.Load<GameObject>("Prefabs/EEhp"), 
 			Resources.Load<GameObject>("Prefabs/Canvas"));
+			Debug.Log(_player);
 			_combatHandler = new CombatHandler(1, false, 1, 9, _player as IPlayer, true, _currentEnemy as IEnemy, _combatDisplay);
 			_im.OnLeftButtonPressed += _selectButton.SelectedActionLeft;
 			_im.OnRightButtonPressed += _selectButton.SelectedActionRight;
@@ -131,7 +133,7 @@ public class GameManager : MonoBehaviour
 		if (_currentScene.buildIndex == 3)
 		{
 			
-		}
+		}*/
 	}
 
     private void Update()
@@ -164,5 +166,41 @@ public class GameManager : MonoBehaviour
 				break;
 		}
 	}
-	
+
+	public void StartCoroutineLoadScene(int scene)
+	{
+		StartCoroutine(LoadScene(scene));
+	}
+
+	public IEnumerator LoadScene(int scene)
+	{
+		float counter = 0;
+		float target = .3f;
+
+		while (counter < target)
+		{
+			counter += Time.deltaTime;
+			yield return null;
+		}
+		if (counter >= target)
+		{
+			switch (scene)
+			{
+				case 0:
+					_sm.LoadScene0();
+					break;
+				case 1:
+					_sm.LoadScene1();
+					break;
+				case 2:
+					_sm.LoadScene2();
+					break;
+				case 3:
+					_sm.LoadScene3();
+					break;
+				default:
+					break;
+			}
+		}
+	}
 }

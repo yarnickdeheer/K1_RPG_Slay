@@ -61,7 +61,6 @@ public class CombatDisplay
 
     public void UpdateEnemyHealth(int hp)
     {
-        Debug.Log("help " + _textEnemyHp.gameObject.name); 
         _textEnemyHp.text = "HP: "+ hp.ToString(); 
     }
 }
