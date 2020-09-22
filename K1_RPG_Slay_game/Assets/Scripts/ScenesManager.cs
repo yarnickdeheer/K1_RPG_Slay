@@ -19,30 +19,28 @@ public class ScenesManager
 		switch (currentScene.buildIndex)
 		{
 			case 0: //go to map
-				LoadScene1();
 				_gm._selectButton = null;
-				GC.Collect();
 				SceneManager.LoadScene(currentScene.buildIndex + 1);
+				_gm.StartCoroutineLoadScene(1);
 				break;
 			case 1: //go to battle
-				LoadScene2();
 				_gm._em = null;
-				GC.Collect();
 				SceneManager.LoadScene(currentScene.buildIndex + 1);
+				_gm.StartCoroutineLoadScene(2);
 				break;
 			case 2: //go to end screen
-				LoadScene3();
-				GC.Collect();
 				SceneManager.LoadScene(currentScene.buildIndex + 1);
+				_gm.StartCoroutineLoadScene(3);
 				break;
 			case 3: //back to map
-				LoadScene1();
-				GC.Collect();
 				SceneManager.LoadScene(currentScene.buildIndex - 2);
+				_gm.StartCoroutineLoadScene(1);
 				break;
 			default:
 				break;
 		}
+
+		GC.Collect();
 	}
 
 	public void LoadScene0()
