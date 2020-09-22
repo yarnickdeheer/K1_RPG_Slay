@@ -10,13 +10,13 @@ public class CombatHandler : ICombatHandler
     public IEnemy _enemy;
     public GameManager _gameManager = GameManager.Instance;
     public CombatDisplay _combatDisplay;
-    public int _choice; // word later vervangen met de input van de speler
+    public int _choice;
     public bool _attacked;
 
     private int _playerPos = 1; 
-    private int _enemyPos = 9;
+    private int _enemyPos = 8;
     private int _distance;
-    private int _moveSpeed;// set this value when start the battle
+    private int _moveSpeed;
 
     public CombatHandler( int choice , bool attacked , int playerpos,int enemypos, IPlayer player , bool playerturn, IEnemy enemy, CombatDisplay display)
     {
@@ -29,7 +29,7 @@ public class CombatHandler : ICombatHandler
         PlayerTurn = playerturn;
         _combatDisplay = display;
         _distance = _enemyPos - _playerPos;
-        _moveSpeed = _gameManager._player.MovePoints;
+        _moveSpeed = _player.MovePoints;
         _combatDisplay.UpdateMoving(_distance, _moveSpeed);
         _combatDisplay.UpdatePlayerHealth(_player.Health);
         _combatDisplay.UpdateEnemyHealth(_enemy.Health);
@@ -39,111 +39,124 @@ public class CombatHandler : ICombatHandler
     public void WhoStarts()
     {
         _distance = _enemyPos - _playerPos;
-        _moveSpeed = _gameManager._player.MovePoints;
+        _moveSpeed = _player.MovePoints;
       
-        if (_gameManager._player.MovePoints > _gameManager._player.MovePoints)
+        if (_player.MovePoints > _enemy.MovePoints)
         {
             PlayerTurn = true;
-            // choose in woth the buttons
         }
         else
         {
             PlayerTurn = false; 
-            EnemyBehaviour(_gameManager._currentEnemy);
+            EnemyBehaviour(_enemy);
         }
     }
 
     public void GetInput(int Choice)
     {
+        Debug.Log("bo");
         if (_attacked == true && Choice == 1)
         {
-            //ga terug naar input scherm
+            Debug.Log("hier gat het fout line59");
             return;
         }
         if (_moveSpeed <= 0)
         {
             if (Choice !=1)
             {
-
+                return;
             }
             else
             {
+                Debug.Log("hier gat het fout line70");
                 Battle(_distance, Choice,_player);
             }
         }
        
         else
         {
+            Debug.Log("hier gat het fout line75");
             Battle(_distance, Choice, _player);
         }
-        //NextTurn();
     }
-    public void EndTurn()
+    public void EndTurn(ICombatant fighter)
     {
-        if (_moveSpeed == 0 && _attacked == true)
-        {
-            _moveSpeed = _gameManager._currentEnemy.MovePoints;
-            EnemyBehaviour(_enemy);
-        }
-        else
-        {
-           // WhoStarts();
-        }
 
+        if (fighter == _player)
+        {
+            Debug.Log("movepoints "+_moveSpeed + " _attacked " + _attacked);
+           
+            if (_attacked == true) 
+            {
+                _moveSpeed = _enemy.MovePoints;
+                _combatDisplay.UpdateMoving(_distance, _moveSpeed);
+                Debug.Log("player heeft aangevallen");
+                _combatDisplay.UpdateMoving(_distance, _moveSpeed);
+                _attacked = false;
+                EnemyBehaviour(_enemy);
+            }
+            if (_moveSpeed <= 0 && _distance > _player.Weapon.Range)
+            {
+                _moveSpeed = _enemy.MovePoints;
+                _combatDisplay.UpdateMoving(_distance, _moveSpeed);
+                Debug.Log("end player turn op basis van mP");
+                EnemyBehaviour(_enemy);
+            }
+        }
+        else if (fighter == _enemy)
+        {
+            if (_attacked == true)
+            {
+                Debug.Log("enemyendturn");
+                _moveSpeed = _player.MovePoints;
+                _combatDisplay.UpdateMoving(_distance, _moveSpeed);
+                _attacked = false;
+                return;
+            }
+            else
+            {
+                EnemyBehaviour(_enemy);
+            }
+        }
     }
 
     public void EnemyTurn()
     {
         _distance = _enemyPos - _playerPos;
-        //PlayerTurn = true;
-        EnemyBehaviour(_gameManager._currentEnemy);
+
+        EnemyBehaviour(_enemy);
 
     }
 
-    /// <summary>
-    /// wanneer de speler of de AI geen health points meer heeft wordt deze functie aangeroepen die naar de post battle display gaat
-    /// </summary>
     public void EndCombat()
     {
-		Debug.Log("Switching Scene from combathandler");
-        //throw new System.NotImplementedException();
         _gameManager.SceneSwitch();
-        // if the player or the enemy is dead 
-        // when the player is dead go to post battle display as loser 
-        // when the enemy is dead go to post battle display as winner
     }
 
-    /// <summary>
-    /// de battle functie kijkt welke keuze de speler of de AI heeft gemaakt op basis daarvan gaat hij kijken of deze actie mogelijk is wanneer niet moet je je keuze opnieuw maken
-    /// </summary>
     public void Battle(int Dis, int Choice , ICombatant fighter)
     {
         if (Choice == 1)
-        { //(attack)
+        {
             if(fighter == _player) 
-            { 
-                if (_player.Weapon.Range <= Dis)
+            {
+                Debug.Log("range: " + _player.Weapon.Range + " distance: " + Dis);
+                if (Dis <=_player.Weapon.Range && _attacked == false )
                 {
                     Attack(fighter, _enemy);
                 }
                 else
                 {
+                    Debug.Log("hij staat op true");
                     return;
-                }
-                if (_attacked == true && _moveSpeed <= 1)
-                {
-                    _attacked = false;
-                    _moveSpeed = _gameManager._currentEnemy.MovePoints;
-                    EnemyBehaviour(_enemy);
                 }
             }
             else
             {
-                if (2 <= Dis)
+                if (Dis <= 2) 
                 {
-                    PlayerTurn = true;
+                    Debug.Log("enemy probeert aantevallen");
+                    PlayerTurn = true; 
                     Attack(fighter, _player);
-
                 }
                 else
                 {
@@ -152,13 +165,9 @@ public class CombatHandler : ICombatHandler
             }
         }    
         else if (Choice == 2)
-        { //(vooruit)
+        { // vooruit
             if (Dis != 1)
             {
-                if (fighter == _enemy)  
-                {
-
-                }
                 Dis--;
                 _moveSpeed--;
                 _distance = Dis;
@@ -166,21 +175,17 @@ public class CombatHandler : ICombatHandler
                 if (_attacked == true && _moveSpeed <= 1)
                 {
                     _attacked = false;
-                    _moveSpeed = _gameManager._currentEnemy.MovePoints;
-                    EnemyBehaviour(_enemy);
+                    _moveSpeed = _enemy.MovePoints;
                 }
                 if (fighter == _enemy)
                 {
-                    EnemyBehaviour(_enemy);
-                    //Debug.Log("wzijn hier AIe");
+                    EndTurn(_enemy);
                 }
-                EndTurn();
+                EndTurn(_player);
             }
             else
             {
-                // ga terug naar input scherm
-
-                EndTurn();
+                EndTurn(_player);
             }
         }
         else if (Choice == 3)
@@ -191,21 +196,21 @@ public class CombatHandler : ICombatHandler
                 _moveSpeed--;
                 _distance = Dis;
                 _combatDisplay.UpdateMoving(Dis, _moveSpeed);
-                // ga terug naar input scherm
                 if (_attacked == true && _moveSpeed <= 1)
                 {
                     _attacked = false;
-                    _moveSpeed = _gameManager._currentEnemy.MovePoints;
-                    EnemyBehaviour(_enemy);
+                    _moveSpeed = _enemy.MovePoints;
                 }
-                EndTurn();
+                if (fighter == _enemy)
+                {
+
+                    EndTurn(_enemy);
+                }
+                EndTurn(_player);
             }
             else
             {
-                Debug.Log("fighter1 staat zo ver achteruit als hij kan");
-                // ga terug naar input scherm
-
-                EndTurn();
+                EndTurn(_player);
             }
         }
     }
@@ -215,7 +220,7 @@ public class CombatHandler : ICombatHandler
     /// </summary>
     public void Attack(ICombatant fighter1, ICombatant fighter2) 
     {
-        if (fighter1 == _gameManager._player)
+        if (fighter1 == _player)
         {
             fighter2.Health -= Mathf.RoundToInt(_player.Weapon.BaseDamage + (1 * fighter1.Str * _player.Weapon.StrScaling) + (1 * fighter1.Dex * _player.Weapon.DexScaling));
             _attacked = true;
@@ -227,14 +232,13 @@ public class CombatHandler : ICombatHandler
             }
             else
             {
-                // go back to input
-
-                EndTurn();
+                EndTurn(_player);
             }
         }
         else
         {
             fighter2.Health -= Mathf.RoundToInt((1 * fighter1.Str) + (1 * fighter1.Dex));
+            Debug.Log("enemy damage: " + Mathf.RoundToInt((1 * fighter1.Str) + (1 * fighter1.Dex)));
             _combatDisplay.UpdatePlayerHealth(fighter2.Health);
             _attacked = true;
             if (fighter2.Health <= 0)
@@ -243,43 +247,36 @@ public class CombatHandler : ICombatHandler
             }
             else
             {
-                // go back to input
-
-
-                EnemyBehaviour(_gameManager._currentEnemy);
-                //EndTurn();
+                EndTurn(_enemy);
             }
         }
     }
 
-    /// <summary>
-    /// de enemy behaviour gaat kijken wat de keuze gaat zijn voor de AI ennemy 
-    /// </summary>
     public void EnemyBehaviour(ICombatant enemy)
-    { 
-
-        Debug.Log(_gameManager._currentEnemy.Health);
-
-        Debug.Log(_gameManager._currentEnemy.MovePoints);
+    {
+        Debug.Log("enemy turn"); 
         if (_attacked == true)
         {
             _moveSpeed = _player.MovePoints;
             _attacked = false;
-            EndTurn();
+            EndTurn(_enemy);
         }
         if (_distance <= 2 && enemy.Health >= 5 && _attacked ==false)
         {
+            Debug.Log("enemy Atack"); 
             _choice = 1;
             Battle(_distance, _choice, _enemy);
         } 
         else if (_distance > 2 && _moveSpeed >=1)
         {
             _choice = 2;
+            Debug.Log("enemy loopt naar voren");
             Battle(_distance, _choice, _enemy);
         }
         else if (enemy.Health < 5 && _distance <= 2 && _moveSpeed >= 1)
         {
             _choice = 3;
+            Debug.Log("enemy  loopt naar achteren"); 
             Battle(_distance, _choice, _enemy);
         }
     }
