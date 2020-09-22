@@ -129,21 +129,21 @@ public class GameManager : MonoBehaviour
 			_im.OnLeftButtonPressed += _selectButton.SelectedActionLeft;
 			_im.OnRightButtonPressed += _selectButton.SelectedActionRight;
 			_im.OnSelectButtonPressed += _selectButton.Use;
-		}
-		if (_currentScene.buildIndex == 3)
-		{
-			
 		}*/
 	}
 
-    private void Update()
+	private void Update()
     {
-		_im.UpdateInputs();
+		if (_im != null)
+		{
+			_im.UpdateInputs();
+		}
 	}
     
 	//This function should be called to switch a Scene
 	public void SceneSwitch()
 	{
+		_im = null;
 		_sm.SceneSwitch();
 	}
 
@@ -184,6 +184,11 @@ public class GameManager : MonoBehaviour
 		}
 		if (counter >= target)
 		{
+			_em = null;
+			_selectButton = null;
+			GC.Collect();
+
+			_im = new InputManager();
 			switch (scene)
 			{
 				case 0:
