@@ -64,7 +64,6 @@ public class CombatHandler : ICombatHandler
         {
             if (Choice !=1)
             {
-                Debug.Log("cant walk anuymore");
 
             }
             else
@@ -106,6 +105,7 @@ public class CombatHandler : ICombatHandler
     /// </summary>
     public void EndCombat()
     {
+		Debug.Log("Switching Scene from combathandler");
         //throw new System.NotImplementedException();
         _gameManager.SceneSwitch();
         // if the player or the enemy is dead 
@@ -157,7 +157,7 @@ public class CombatHandler : ICombatHandler
             {
                 if (fighter == _enemy)  
                 {
-                    Debug.Log("wzijn hier AIe");
+
                 }
                 Dis--;
                 _moveSpeed--;
@@ -178,7 +178,6 @@ public class CombatHandler : ICombatHandler
             }
             else
             {
-                Debug.Log("fighter1 staat voor de fighter2");
                 // ga terug naar input scherm
 
                 EndTurn();
@@ -218,7 +217,6 @@ public class CombatHandler : ICombatHandler
     {
         if (fighter1 == _gameManager._player)
         {
-            Debug.Log(fighter2.Health); 
             fighter2.Health -= Mathf.RoundToInt(_player.Weapon.BaseDamage + (1 * fighter1.Str * _player.Weapon.StrScaling) + (1 * fighter1.Dex * _player.Weapon.DexScaling));
             _attacked = true;
             _combatDisplay.UpdateEnemyHealth(fighter2.Health);
@@ -265,7 +263,6 @@ public class CombatHandler : ICombatHandler
         Debug.Log(_gameManager._currentEnemy.MovePoints);
         if (_attacked == true)
         {
-            Debug.Log("EnemyTurn done");
             _moveSpeed = _player.MovePoints;
             _attacked = false;
             EndTurn();
@@ -277,7 +274,6 @@ public class CombatHandler : ICombatHandler
         } 
         else if (_distance > 2 && _moveSpeed >=1)
         {
-            Debug.Log("walk"); 
             _choice = 2;
             Battle(_distance, _choice, _enemy);
         }

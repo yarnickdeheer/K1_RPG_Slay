@@ -19,12 +19,10 @@ public class ScenesManager
 		switch (currentScene.buildIndex)
 		{
 			case 0: //go to map
-				_gm._selectButton = null;
 				SceneManager.LoadScene(currentScene.buildIndex + 1);
 				_gm.StartCoroutineLoadScene(1);
 				break;
 			case 1: //go to battle
-				_gm._em = null;
 				SceneManager.LoadScene(currentScene.buildIndex + 1);
 				_gm.StartCoroutineLoadScene(2);
 				break;
