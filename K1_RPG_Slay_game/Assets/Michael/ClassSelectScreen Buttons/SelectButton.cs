@@ -114,6 +114,7 @@ public class SelectButton
 	private void Attack()
 	{
 		gm._combatHandler._choice = 1;
+        Debug.Log("atack select button");
 		gm._combatHandler.GetInput(1);
 		//DestroyButtons();
 
