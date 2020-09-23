@@ -33,28 +33,37 @@ public class CombatHandler : ICombatHandler
         _combatDisplay.UpdateMoving(_distance, _moveSpeed);
         _combatDisplay.UpdatePlayerHealth(_player.Health);
         _combatDisplay.UpdateEnemyHealth(_enemy.Health);
-
-    }
-
-    public void WhoStarts()
-    {
-        _distance = _enemyPos - _playerPos;
-        _moveSpeed = _player.MovePoints;
-      
         if (_player.MovePoints > _enemy.MovePoints)
         {
-            PlayerTurn = true;
+           PlayerTurn = true;
         }
         else
         {
             PlayerTurn = false; 
             EnemyBehaviour(_enemy);
-        }
+       }
+
     }
+
+    //public void WhoStarts()
+    //{
+    //    _distance = _enemyPos - _playerPos;
+    //    _moveSpeed = _player.MovePoints;
+
+    //    if (_player.MovePoints > _enemy.MovePoints)
+    //    {
+    //        PlayerTurn = true;
+    //    }
+    //    else
+    //    {
+    //        PlayerTurn = false; 
+    //        EnemyBehaviour(_enemy);
+    //    }
+    //}
 
     public void GetInput(int Choice)
     {
-        Debug.Log("bo");
+        Debug.Log("sss "+_attacked);
         if (_attacked == true && Choice == 1)
         {
             Debug.Log("hier gat het fout line59");
