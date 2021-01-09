@@ -89,47 +89,20 @@ public class GameManager : MonoBehaviour
 		//Check the current scene
 		_currentScene = SceneManager.GetActiveScene();
 
-		//This happens here because it's the best way to detect if it's the start of the game, and this needs to happen then
+		//This happens here because it's the best way to detect if it's the start of the game
+		//adds the way of input of the current scene
+		//for the other scenes it happens in ScenesManager
 		if (_currentScene.buildIndex == 0)
 		{
 			_selectButton = new SelectButton(Resources.Load<Sprite>("Sprites/PlayerSelect"),
 				Resources.Load<Sprite>("Sprites/PlayerDeselect"),
 				Resources.Load<GameObject>("Prefabs/Button"),false);
 
-			_im.OnLeftButtonPressed += _selectButton.SelectedActionLeft;
-			_im.OnRightButtonPressed += _selectButton.SelectedActionRight;
-			_im.OnSelectButtonPressed += _selectButton.Use;
+			//add listeners so we can invoke methods from input using eventmanager 
+			EventManager.AddListener(EventType.ON_LEFT, _selectButton.SelectedActionLeft);
+			EventManager.AddListener(EventType.ON_RIGHT, _selectButton.SelectedActionRight);
+			EventManager.AddListener(EventType.ON_USE, _selectButton.Use);
 		}
-		/*
-		if (_currentScene.buildIndex == 1)
-		{
-			//instantiate a new encountermanager script which handles the map logic
-			_em = new EncounterManager();
-
-			_im.OnLeftButtonPressed += _em.SelectedEncounterLeft;
-			_im.OnRightButtonPressed += _em.SelectedEncounterRight;
-			_im.OnSelectButtonPressed += _em.Use;
-		}
-		else if (_currentScene.buildIndex == 2)
-		{
-			// just for playability
-			_currentEnemy = new Enemy(2,2,2,2);
-
-			_selectButton = new SelectButton(Resources.Load<Sprite>("Sprites/PlayerSelect"),
-			Resources.Load<Sprite>("Sprites/PlayerDeselect"),
-			Resources.Load<GameObject>("Prefabs/Button"), true);
-			
-			_combatDisplay = new CombatDisplay(Resources.Load<GameObject>("Prefabs/dis"),
-			Resources.Load<GameObject>("Prefabs/moveP"),
-			Resources.Load<GameObject>("Prefabs/Php"),
-			Resources.Load<GameObject>("Prefabs/EEhp"), 
-			Resources.Load<GameObject>("Prefabs/Canvas"));
-			Debug.Log(_player);
-			_combatHandler = new CombatHandler(1, false, 1, 9, _player as IPlayer, true, _currentEnemy as IEnemy, _combatDisplay);
-			_im.OnLeftButtonPressed += _selectButton.SelectedActionLeft;
-			_im.OnRightButtonPressed += _selectButton.SelectedActionRight;
-			_im.OnSelectButtonPressed += _selectButton.Use;
-		}*/
 	}
 
 	private void Update()
