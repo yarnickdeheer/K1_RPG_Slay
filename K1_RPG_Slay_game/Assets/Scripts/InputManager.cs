@@ -2,25 +2,28 @@
 
 public class InputManager
 {
-	//there are 3 different buttons in our game, so we define those here
+	//there are 3 different inputs in our game, so we define those here
 	public event System.Action OnLeftButtonPressed;
 	public event System.Action OnRightButtonPressed;
 	public event System.Action OnSelectButtonPressed;
 
-	//Checks the inputs and calls methods based upon the inputs. For now, depending on the scene the script has different functionality.
+	//Checks the inputs and calls methods (system.actions) based upon the inputs.
 	public void UpdateInputs()
 	{
 		if (Input.GetKeyDown(KeyCode.LeftArrow))
 		{
-			OnLeftButtonPressed?.Invoke();
+			//OnLeftButtonPressed?.Invoke();
+			EventManager.RaiseEvent(EventType.ON_LEFT);
 		}
 		if (Input.GetKeyDown(KeyCode.RightArrow))
 		{
-			OnRightButtonPressed?.Invoke();
+			//OnRightButtonPressed?.Invoke();
+			EventManager.RaiseEvent(EventType.ON_RIGHT);
 		}
 		if (Input.GetKeyDown(KeyCode.Space))
 		{
-			OnSelectButtonPressed?.Invoke();
+			//OnSelectButtonPressed?.Invoke();
+			EventManager.RaiseEvent(EventType.ON_USE);
 		}
 		else
 		{

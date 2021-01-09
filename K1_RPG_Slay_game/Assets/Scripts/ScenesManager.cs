@@ -41,6 +41,7 @@ public class ScenesManager
 		GC.Collect();
 	}
 
+	//for when you go back to the main menu
 	public void LoadScene0()
 	{
 		//instantiate a new selectbutton which handles the player input on the startscreen
@@ -48,9 +49,9 @@ public class ScenesManager
 				Resources.Load<Sprite>("Sprites/PlayerDeselect"),
 				Resources.Load<GameObject>("Prefabs/Button"), false);
 
-		_gm._im.OnLeftButtonPressed += _gm._selectButton.SelectedActionLeft;
-		_gm._im.OnRightButtonPressed += _gm._selectButton.SelectedActionRight;
-		_gm._im.OnSelectButtonPressed += _gm._selectButton.Use;
+		EventManager.AddListener(EventType.ON_LEFT, _gm._selectButton.SelectedActionLeft);
+		EventManager.AddListener(EventType.ON_RIGHT, _gm._selectButton.SelectedActionRight);
+		EventManager.AddListener(EventType.ON_USE, _gm._selectButton.Use);
 	}
 
 	public void LoadScene1()
@@ -58,9 +59,9 @@ public class ScenesManager
 		//instantiate a new encountermanager script which handles the map logic
 		_gm._em = new EncounterManager();
 
-		_gm._im.OnLeftButtonPressed += _gm._em.SelectedEncounterLeft;
-		_gm._im.OnRightButtonPressed += _gm._em.SelectedEncounterRight;
-		_gm._im.OnSelectButtonPressed += _gm._em.Use;
+		EventManager.AddListener(EventType.ON_LEFT, _gm._em.SelectedEncounterLeft);
+		EventManager.AddListener(EventType.ON_RIGHT, _gm._em.SelectedEncounterRight);
+		EventManager.AddListener(EventType.ON_USE, _gm._em.Use);
 	}
 
 	public void LoadScene2()
@@ -77,9 +78,10 @@ public class ScenesManager
 		Resources.Load<GameObject>("Prefabs/EEhp"),
 		Resources.Load<GameObject>("Prefabs/Canvas"));
 		_gm._combatHandler = new CombatHandler(1, false, 1, 9, _gm._player as IPlayer, true, _gm._currentEnemy as IEnemy, _gm._combatDisplay);
-		_gm._im.OnLeftButtonPressed += _gm._selectButton.SelectedActionLeft;
-		_gm._im.OnRightButtonPressed += _gm._selectButton.SelectedActionRight;
-		_gm._im.OnSelectButtonPressed += _gm._selectButton.Use;
+
+		EventManager.AddListener(EventType.ON_LEFT, _gm._selectButton.SelectedActionLeft);
+		EventManager.AddListener(EventType.ON_RIGHT, _gm._selectButton.SelectedActionRight);
+		EventManager.AddListener(EventType.ON_USE, _gm._selectButton.Use);
 	}
 
 	public void LoadScene3()
